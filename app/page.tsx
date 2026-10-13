@@ -5,6 +5,7 @@ import { EclipseDisc, HeaderTools } from "@/components/header-tools";
 import { ProstrationGuide } from "@/components/prostration-guide";
 import { CundiMonths, MantraCounter, Step } from "@/components/ritual";
 import { SutraCard } from "@/components/sutra-card";
+import { Toc } from "@/components/toc";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { VideoRow } from "@/components/video";
 import { card, Note, Scroll, ScriptureBody, Verses } from "@/components/ui";
@@ -25,7 +26,7 @@ function Refuge() {
 export default function Home() {
   return (
     <div className="px-4">
-      <main className="mx-auto max-w-[40rem] pt-7 pb-16">
+      <main className="mx-auto max-w-[40rem] pt-7 pb-24">
         <header className="grid gap-1.5 border-b border-line pb-6">
           <div className="flex items-start justify-between gap-4">
             <div className="grid min-w-0 gap-1.5">
@@ -88,16 +89,16 @@ export default function Home() {
           <Step id="sutras" title="誦經">
             <Note>會念的三部經。</Note>
             <div className="mt-2 grid gap-3">
-              <SutraCard glyph="金" title="金剛經" meta="金剛般若波羅蜜經 · 鳩摩羅什譯" href={LINKS.diamond}>
+              <SutraCard id="sutra-diamond" glyph="金" title="金剛經" meta="金剛般若波羅蜜經 · 鳩摩羅什譯" href={LINKS.diamond}>
                 <ScriptureBody k="diamond" />
               </SutraCard>
-              <SutraCard glyph="普" title="普門品" meta="妙法蓮華經觀世音菩薩普門品" href={LINKS.pumen}>
+              <SutraCard id="sutra-pumen" glyph="普" title="普門品" meta="妙法蓮華經觀世音菩薩普門品" href={LINKS.pumen}>
                 <ScriptureBody k="pumen" />
               </SutraCard>
-              <SutraCard glyph="悲" title="大悲咒" meta="千手千眼無礙大悲心陀羅尼 · 八十四句">
+              <SutraCard id="sutra-dabei" glyph="悲" title="大悲咒" meta="千手千眼無礙大悲心陀羅尼 · 八十四句">
                 <Dabei />
               </SutraCard>
-              <SutraCard glyph="懺" title="八十八佛大懺悔文" meta="八十八佛洪名寶懺 · 普賢行願品偈" href={LINKS.b88}>
+              <SutraCard id="sutra-b88" glyph="懺" title="八十八佛大懺悔文" meta="八十八佛洪名寶懺 · 普賢行願品偈" href={LINKS.b88}>
                 <ScriptureBody k="b88" />
               </SutraCard>
             </div>
@@ -121,7 +122,7 @@ export default function Home() {
           </Step>
         </ol>
 
-        <section className={`${card} mt-1.5 grid gap-2.5 border-gold p-5`}>
+        <section id="eclipse" className={`${card} mt-1.5 grid scroll-mt-6 gap-2.5 border-gold p-5`}>
           <h2 className="flex items-center gap-2.5 font-display text-[1.375rem] font-bold">
             <EclipseDisc />
             月食修持
@@ -137,6 +138,7 @@ export default function Home() {
           <p className="text-[0.8125rem] text-muted">月食前 14 天起，打開此頁會跳出提醒。時間為約略值，依 NASA 月食表換算。</p>
         </section>
 
+        <Toc />
         <footer className="mt-2.5 text-center text-[0.8125rem] text-muted">功德圓滿 · 南無阿彌陀佛</footer>
       </main>
     </div>

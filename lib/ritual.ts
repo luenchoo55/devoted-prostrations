@@ -5,6 +5,18 @@ export type StepId = (typeof STEP_IDS)[number];
 export const activeSteps = (offering: boolean | null) =>
   STEP_IDS.filter((id) => id !== "vajrasattva" || offering === true);
 
+// 目錄用的簡短名稱
+export const STEP_LABELS: Record<StepId, string> = {
+  lamp: "頂禮點燈",
+  cundi: "準提佛母祈禱文",
+  refuge1: "皈依頂禮",
+  mantra: "功德倍增咒",
+  vajrasattva: "金剛薩埵百字明咒",
+  sutras: "誦經",
+  dedicate: "迴向",
+  refuge2: "皈依頂禮",
+};
+
 export const MANTRA_TIMES = 7;
 export const VAJRA_TIMES = 3;
 

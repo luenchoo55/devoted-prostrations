@@ -5,12 +5,14 @@ import { PlayIcon, Player, useVideo } from "./video";
 
 // 一部經一張卡：上方標題與播放，下方展開經文；經文很長，底部也放一個收合
 export function SutraCard({
+  id,
   glyph,
   title,
   meta,
   href,
   children,
 }: {
+  id: string;
   glyph: string;
   title: string;
   meta: string;
@@ -26,7 +28,7 @@ export function SutraCard({
   };
 
   return (
-    <article ref={ref} className="scroll-mt-4 overflow-hidden rounded-2xl border border-line bg-paper transition-colors hover:border-gold/60">
+    <article id={id} ref={ref} className="scroll-mt-6 overflow-hidden rounded-2xl border border-line bg-paper transition-colors hover:border-gold/60">
       <div className="flex items-center gap-3 p-4">
         <div
           aria-hidden

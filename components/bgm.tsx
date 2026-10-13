@@ -37,7 +37,7 @@ export function Bgm() {
 
   const playing = state === "playing";
   return (
-    <div className="mt-6 flex items-center gap-3 rounded-xl border border-dashed border-line px-4 py-3">
+    <div id="bgm" className="mt-6 flex scroll-mt-6 items-center gap-3 rounded-xl border border-dashed border-line px-4 py-3">
       <audio ref={ref} src="/audio/tara-21-praises.mp3" loop preload="auto" />
       <button
         type="button"

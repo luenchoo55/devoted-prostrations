@@ -14,7 +14,7 @@ export function Step({ id, title, children }: { id: StepId; title: string; child
   if (index < 0) return null;
   const d = done.includes(id);
   return (
-    <li className="group/step relative grid grid-cols-[2.75rem_1fr] gap-3.5 pb-8">
+    <li id={`step-${id}`} className="group/step relative grid scroll-mt-6 grid-cols-[2.75rem_1fr] gap-3.5 pb-8">
       <span aria-hidden className="absolute top-[2.875rem] bottom-1 left-[1.3125rem] w-0.5 bg-line group-last/step:hidden" />
       <div
         className={`grid size-11 place-items-center rounded-[0.625rem] border-2 border-kasaya font-display text-xl font-bold transition-colors ${
