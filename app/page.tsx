@@ -37,7 +37,7 @@ export default function Home() {
                 aria-hidden
                 className="grid rotate-3 place-items-center rounded-md border-2 border-kasaya px-1.5 py-2 font-display text-lg leading-[1.15] font-bold text-kasaya opacity-85 [writing-mode:vertical-rl]"
               >
-                天滿宮
+                磕頭
               </div>
             </div>
           </div>
