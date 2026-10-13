@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { activeSteps, LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
+import { nextSession, SESSION_LABEL, splitDuration } from "@/lib/session";
 import { Modal, modalBtn as btn } from "./modal";
 import { PlayIcon, Player, useVideo } from "./video";
 
@@ -19,6 +20,9 @@ export function HeaderTools() {
   const next = now === null ? undefined : nextEclipse(now);
   // null：依「14 天內且本次開頁未看過」自動決定；true/false：使用者手動開關
   const [eclipseOpen, setEclipseOpen] = useState<boolean | null>(null);
+  // 每次打開先跳共修倒數，關掉後才問供品、提醒月食
+  const [sessionOpen, setSessionOpen] = useState(true);
+  const showSession = sessionOpen && now !== null;
   const autoEclipse = (() => {
     if (!next || now === null) return false;
     let seen = null;
@@ -26,7 +30,7 @@ export function HeaderTools() {
     return daysTo(next, now) <= 14 && seen !== String(next.t);
   })();
   // 先問供品，再提醒月食
-  const showEclipse = offering !== null && (eclipseOpen ?? autoEclipse);
+  const showEclipse = !showSession && offering !== null && (eclipseOpen ?? autoEclipse);
   const eclipseVideo = useVideo("eclipse-modal");
   const closeEclipse = () => {
     if (eclipseVideo.open) eclipseVideo.toggle();
@@ -62,7 +66,9 @@ export function HeaderTools() {
         </span>
       </div>
 
-      {offering === null && (
+      {showSession && <SessionModal onClose={() => setSessionOpen(false)} />}
+
+      {!showSession && offering === null && (
         <Modal labelledBy="offering-title">
           <span aria-hidden className="mx-auto grid size-14 place-items-center rounded-xl border-2 border-kasaya font-display text-[1.75rem] font-bold text-kasaya">
             供
@@ -119,6 +125,47 @@ export function HeaderTools() {
         </Modal>
       )}
     </>
+  );
+}
+
+// 共修倒數：每秒更新
+function SessionModal({ onClose }: { onClose: () => void }) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+  const { start, live } = nextSession(now);
+  const { d, h, m, s } = splitDuration(start - now);
+  const units: [number, string][] = [[d, "天"], [h, "時"], [m, "分"], [s, "秒"]];
+  return (
+    <Modal labelledBy="session-title" onClose={onClose}>
+      <div className="text-[0.8125rem] font-bold tracking-[.18em] text-gold">{SESSION_LABEL} · 天滿宮共修</div>
+      <h3 id="session-title" className="font-display text-2xl leading-snug">
+        {live ? "共修進行中！" : "共修要開始咯！"}
+      </h3>
+      {live ? (
+        <p className="font-display text-lg text-kasaya">已於 {fmtTime(start)} 開始，快來一起修持</p>
+      ) : (
+        <div className="mx-auto flex gap-2" role="timer" aria-live="off">
+          {units.map(([v, unit]) => (
+            <div key={unit} className="grid w-[3.75rem] gap-0.5 rounded-xl border border-line bg-rice py-2">
+              <span className="font-display text-[1.75rem] leading-none font-bold text-kasaya tabular-nums">
+                {unit === "天" ? v : String(v).padStart(2, "0")}
+              </span>
+              <span className="text-xs text-muted">{unit}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      <p className="text-[0.8125rem] text-muted">{live ? "本次" : "下次"}共修：{fmtDate(start)} {fmtTime(start)}</p>
+      <p className="font-display text-xl">準備好磕頭唱歌了嗎？</p>
+      <div className="mt-1.5 flex justify-center">
+        <button type="button" autoFocus className={`${btn} border-kasaya bg-kasaya text-paper`} onClick={onClose}>
+          準備好了
+        </button>
+      </div>
+    </Modal>
   );
 }
 
