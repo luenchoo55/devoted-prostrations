@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { daysUntil, KIND_LABEL, PRAYER_KINDS, shortName, upcomingEvents } from "@/lib/calendar";
 import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { activeSteps, LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
@@ -22,6 +23,8 @@ export function HeaderTools() {
   const next = now === null ? undefined : nextEclipse(now);
   // null：依「14 天內且本次開頁未看過」自動決定；true/false：使用者手動開關
   const [eclipseOpen, setEclipseOpen] = useState<boolean | null>(null);
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const upcoming = now === null ? [] : upcomingEvents(now);
   // 每次打開先跳共修倒數，關掉後才問供品、提醒月食
   const showSession = useSessionModal() && now !== null;
   const autoEclipse = (() => {
@@ -57,9 +60,9 @@ export function HeaderTools() {
         >
           {offering ? "有供品" : "無供品"}
         </button>
-        {next && (
-          <button type="button" className={`${chip} border-gold text-gold`} onClick={() => setEclipseOpen(true)}>
-            下次月食 {fmtDate(next.t, false)}
+        {upcoming[0] && now !== null && (
+          <button type="button" className={`${chip} border-gold text-gold`} onClick={() => setCalendarOpen(true)}>
+            {daysUntil(upcoming[0].date, now) === 0 ? "今天" : "下次"} · {shortName(upcoming[0])} {fmtDate(Date.parse(upcoming[0].date + "T12:00:00+08:00"), false).slice(5)}
           </button>
         )}
         <span className="text-sm text-muted tabular-nums">
@@ -87,6 +90,53 @@ export function HeaderTools() {
             </button>
             <button type="button" className={`${btn} border-line`} onClick={() => setOffering(false)}>
               沒有
+            </button>
+          </div>
+        </Modal>
+      )}
+
+      {calendarOpen && now !== null && (
+        <Modal labelledBy="calendar-title" onClose={() => setCalendarOpen(false)}>
+          <h3 id="calendar-title" className="font-display text-2xl leading-snug">歲時節令</h3>
+          <p className="text-[0.8125rem] text-muted">
+            願文說「或於日月蝕時日……或於冬夏至年節」，標
+            <span className="mx-1 inline-block size-2 rounded-full bg-kasaya align-middle" aria-hidden />
+            的日子特別適合念誦《普賢王如來祈願文》。
+          </p>
+          <ol className="grid text-left">
+            {upcoming.map((e) => {
+              const d = daysUntil(e.date, now);
+              const prayer = PRAYER_KINDS.includes(e.kind);
+              const content = (
+                <>
+                  <span className="w-[4.5rem] flex-none text-sm text-muted tabular-nums">{fmtDate(Date.parse(e.date + "T12:00:00+08:00")).slice(5)}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center gap-1.5">
+                      {prayer && <span className="size-2 flex-none rounded-full bg-kasaya" aria-label="宜誦願文" />}
+                      <span className="font-display text-[1.0625rem]">{e.name}</span>
+                    </span>
+                    <span className="text-xs text-muted">{KIND_LABEL[e.kind]}</span>
+                  </span>
+                  <span className={`flex-none text-xs tabular-nums ${d === 0 ? "font-bold text-kasaya" : "text-muted"}`}>{d === 0 ? "今天" : `${d} 天後`}</span>
+                </>
+              );
+              const row = "flex w-full items-center gap-3 border-b border-line py-2.5";
+              return (
+                <li key={e.date + e.name}>
+                  {e.kind === "lunar-eclipse" ? (
+                    <button type="button" className={`${row} cursor-pointer text-left hover:bg-gold-soft/40`} onClick={() => { setCalendarOpen(false); setEclipseOpen(true); }}>
+                      {content}
+                    </button>
+                  ) : (
+                    <div className={row}>{content}</div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+          <div className="mt-1.5 flex justify-center">
+            <button type="button" autoFocus className={`${btn} border-line`} onClick={() => setCalendarOpen(false)}>
+              關閉
             </button>
           </div>
         </Modal>
