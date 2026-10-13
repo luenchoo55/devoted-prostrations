@@ -129,7 +129,7 @@ export default function Home() {
         <section id="eclipse" className={`${card} mt-1.5 grid scroll-mt-6 gap-2.5 border-gold p-5`}>
           <h2 className="flex items-center gap-2.5 font-display text-[1.375rem] font-bold">
             <EclipseDisc />
-            月食修持
+            普賢王如來祈願文
           </h2>
           <div className="grid gap-2 text-muted">
             <p>
