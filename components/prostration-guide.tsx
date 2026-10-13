@@ -59,7 +59,7 @@ export function ProstrationGuide() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="mt-2 flex cursor-pointer items-center gap-1.5 text-[15px] text-kasaya underline decoration-dotted underline-offset-4"
+        className="flex cursor-pointer items-center gap-1.5 text-[15px] text-kasaya underline decoration-dotted underline-offset-4"
       >
         如何身口意頂禮？教學 ▸
       </button>
