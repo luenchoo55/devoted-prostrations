@@ -32,7 +32,7 @@ export function Dabei() {
           return (
             <li key={i} className="grid grid-cols-[2.2em_1fr] items-end gap-1.5 border-b border-dotted border-line py-[0.1875rem]">
               <span className="pb-1.5 text-xs text-gold tabular-nums">{i + 1}</span>
-              <span className="flex min-w-0 flex-wrap gap-x-0.5 font-display text-[1.375rem] leading-normal">
+              <span className="flex min-w-0 flex-wrap gap-x-0.5 font-display text-[calc(1.375rem*var(--scr))] leading-normal">
                 {[...hz].map((c, j) => {
                   const p = syl[j] ?? "";
                   const rt = mode === "py" ? p : mode === "zy" && p ? toZhuyin(p) : null;
@@ -45,7 +45,7 @@ export function Dabei() {
                 })}
               </span>
               {mode === "ro" && (
-                <span className="col-start-2 min-w-0 pb-1 text-[0.9375rem] leading-normal break-words text-kasaya italic">{ROMAN[i]}</span>
+                <span className="col-start-2 min-w-0 pb-1 text-[calc(0.9375rem*var(--scr))] leading-normal break-words text-kasaya italic">{ROMAN[i]}</span>
               )}
             </li>
           );

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { activeSteps, STEP_LABELS } from "@/lib/ritual";
 import { useRitual } from "@/lib/stores";
 import { BgmPlayButton, BgmVolume } from "./bgm";
+import { FontScaleControl } from "./font-scale";
 import { setSessionModal } from "./header-tools";
 
 const NUMERALS = "一二三四五六七八九十";
@@ -63,6 +64,7 @@ export function Toc() {
             </div>
             <BgmVolume />
           </div>
+          <FontScaleControl className="mb-1 px-2 py-1.5" />
           <ol>
             {steps.map((id, i) => {
               const d = done.includes(id);

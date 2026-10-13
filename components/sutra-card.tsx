@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
+import { FontScaleControl } from "./font-scale";
 import { PlayIcon, Player, useVideo } from "./video";
 
 // 一部經一張卡：上方標題與播放，下方展開經文；經文很長，底部也放一個收合
@@ -74,7 +75,8 @@ export function SutraCard({
       </button>
 
       {open && (
-        <div className="border-t border-line px-4 pt-4 pb-3">
+        <div className="border-t border-line px-4 pt-3 pb-3">
+          <FontScaleControl className="mb-4" />
           {children}
           <button
             type="button"

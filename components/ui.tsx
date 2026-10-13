@@ -43,7 +43,7 @@ export function ScriptureBody({ k }: { k: TextKey }) {
   const heads = blocks.filter(([kind]) => kind === "h").map(([, v]) => v as string);
   let h = 0;
   return (
-    <div className="grid gap-4 font-display text-[1.1875rem] leading-[1.95]">
+    <div className="grid gap-4 font-display text-[calc(1.1875rem*var(--scr))] leading-[1.95]">
       {heads.length > 0 && (
         <nav aria-label="分段跳轉" className="rounded-xl bg-gold-soft/50 p-3 font-sans">
           <div className="mb-2 text-[0.8125rem] text-muted">跳到第幾分</div>
@@ -65,7 +65,7 @@ export function ScriptureBody({ k }: { k: TextKey }) {
         if (kind === "h") {
           h++;
           return (
-            <h4 key={i} id={`${k}-${h}`} className="mt-3 flex scroll-mt-6 items-center gap-3 text-base font-bold tracking-wider text-kasaya">
+            <h4 key={i} id={`${k}-${h}`} className="mt-3 flex scroll-mt-6 items-center gap-3 text-[calc(1rem*var(--scr))] font-bold tracking-wider text-kasaya">
               <span aria-hidden className="h-px flex-1 bg-line" />
               {v as string}
               <span aria-hidden className="h-px flex-1 bg-line" />
@@ -74,7 +74,7 @@ export function ScriptureBody({ k }: { k: TextKey }) {
         }
         if (kind === "n")
           return (
-            <div key={i} className="grid grid-cols-[repeat(auto-fill,minmax(11em,1fr))] gap-x-3.5 gap-y-0.5 text-lg leading-[1.9]">
+            <div key={i} className="grid grid-cols-[repeat(auto-fill,minmax(11em,1fr))] gap-x-3.5 gap-y-0.5 text-[calc(1.125rem*var(--scr))] leading-[1.9]">
               {(v as string[]).map((name) => (
                 <span key={name} className="min-w-0">{name}</span>
               ))}
@@ -103,7 +103,7 @@ export function ScriptureBody({ k }: { k: TextKey }) {
 // 偈頌：每段一組，每組逐行
 export function Verses({ stanzas }: { stanzas: string[][] }) {
   return (
-    <div className="grid gap-4 border-l-3 border-gold px-4 py-1.5 font-display text-[1.1875rem] leading-[1.9]">
+    <div className="grid gap-4 border-l-3 border-gold px-4 py-1.5 font-display text-[calc(1.1875rem*var(--scr))] leading-[1.9]">
       {stanzas.map((lines, i) => (
         <div key={i} className="grid gap-1">
           {lines.map((line, j) => (

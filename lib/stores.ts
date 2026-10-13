@@ -93,6 +93,16 @@ const dabeiMode = persisted<DabeiMode>(
 export const useDabeiMode = dabeiMode.use;
 export const setDabeiMode = dabeiMode.set;
 
+// 經文字級：寫進 <html data-font>，CSS 依此放大經文
+export type FontScale = "s" | "m" | "l" | "xl";
+const SCALES: FontScale[] = ["s", "m", "l", "xl"];
+const fontScale = persisted<FontScale>("tmg-font", (raw) => (SCALES.includes(raw as FontScale) ? (raw as FontScale) : "m"), "m");
+export const useFontScale = fontScale.use;
+export function setFontScale(f: FontScale) {
+  document.documentElement.dataset.font = f;
+  fontScale.set(f);
+}
+
 // 開頁時間：只在瀏覽器取一次，伺服器端為 null
 let openedAt: number | undefined;
 const noop = () => () => {};

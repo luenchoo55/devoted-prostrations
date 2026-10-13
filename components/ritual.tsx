@@ -51,7 +51,7 @@ export function MantraCounter({ id, zh, lat }: { id: Counter; zh: string; lat: s
   const total = COUNTER_TIMES[id];
   return (
     <div className={`${card} mt-2 p-4`}>
-      <p className="font-display text-[1.3125rem] leading-[1.8]">{zh}</p>
+      <p className="font-display text-[calc(1.3125rem*var(--scr))] leading-[1.8]">{zh}</p>
       <p className="mt-1 mb-3 text-sm text-muted italic">{lat}</p>
       <div className="flex flex-wrap items-center gap-2.5">
         <button

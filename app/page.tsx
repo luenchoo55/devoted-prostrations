@@ -156,11 +156,14 @@ export default function Home() {
               <li>月食時只要月亮在地平線上，各地都能同時看到；台灣看不看得到，取決於當時月亮是否已經升起（白天就看不到）。</li>
               <li>表中時間是「食甚」，也就是食得最深的時刻；整個過程（含半影）常長達四到六小時。</li>
             </ul>
+            <div className="mt-4">
+              <div className="mb-1 font-bold">近年月食時間表</div>
+              <EclipseTable />
+              <p className="mt-2 text-[0.8125rem] text-muted">
+                月食前 14 天起，打開此頁會跳出提醒。日期、食甚時間與類型已依 NASA 月食表（Espenak）核對，換算為台灣時間；「台灣」一欄為依月出月落推估的大致可見情形。
+              </p>
+            </div>
           </Scroll>
-          <EclipseTable />
-          <p className="text-[0.8125rem] text-muted">
-            月食前 14 天起，打開此頁會跳出提醒。日期、食甚時間與類型已依 NASA 月食表（Espenak）核對，換算為台灣時間；「台灣」一欄為依月出月落推估的大致可見情形。
-          </p>
         </section>
 
         <Toc />
