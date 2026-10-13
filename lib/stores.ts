@@ -61,11 +61,15 @@ export function toggleStep(id: StepId) {
 
 export const COUNTER_TIMES: Record<Counter, number> = { mantra: MANTRA_TIMES, vajrasattva: VAJRA_TIMES };
 
-// 念滿遍數即自動勾選該步驟
+// 念滿遍數即自動勾選該步驟；圓滿後再點一次清空重來（同時取消勾選）
 export function tapCounter(id: Counter) {
   stopBgm();
   const s = current();
-  const n = Math.min(s.counts[id] + 1, COUNTER_TIMES[id]);
+  if (s.counts[id] >= COUNTER_TIMES[id]) {
+    ritual.set({ ...s, counts: { ...s.counts, [id]: 0 }, done: s.done.filter((x) => x !== id) });
+    return;
+  }
+  const n = s.counts[id] + 1;
   const done = n === COUNTER_TIMES[id] && !s.done.includes(id) ? [...s.done, id] : s.done;
   ritual.set({ ...s, counts: { ...s.counts, [id]: n }, done });
 }

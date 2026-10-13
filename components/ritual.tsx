@@ -70,6 +70,7 @@ export function MantraCounter({ id, zh, lat }: { id: Counter; zh: string; lat: s
         <span className="text-sm text-muted tabular-nums">
           {n} / {total}
         </span>
+        {n >= total && <span className="text-xs text-muted">再點一次可清空重來</span>}
       </div>
     </div>
   );
