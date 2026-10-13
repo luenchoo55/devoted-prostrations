@@ -1,9 +1,9 @@
 "use client";
 
-import { DABEI, ROMAN, toZhuyin } from "@/lib/dabei";
+import { DABEI, toZhuyin } from "@/lib/dabei";
 import { setDabeiMode, useDabeiMode, type DabeiMode } from "@/lib/stores";
 
-const MODES: [DabeiMode, string][] = [["py", "拼音"], ["zy", "注音"], ["ro", "羅馬拼音"], ["none", "不標"]];
+const MODES: [DabeiMode, string][] = [["py", "拼音"], ["zy", "注音"], ["none", "不標"]];
 
 // 注音直排在字的右邊（台灣課本式）：聲調標在注音右側，輕聲「˙」在最上面
 function ZhuyinChar({ char, zhuyin }: { char: string; zhuyin: string }) {
@@ -74,15 +74,12 @@ export function Dabei() {
                   );
                 })}
               </span>
-              {mode === "ro" && (
-                <span className="col-start-2 min-w-0 pb-1 text-[calc(0.9375rem*var(--scr))] leading-normal break-words text-kasaya italic">{ROMAN[i]}</span>
-              )}
             </li>
           );
         })}
       </ol>
       <p className="text-[0.8125rem] text-muted">
-        拼音、注音採常見誦念讀法，與字典音不盡相同。羅馬拼音為梵文還原的通行版本，逐句對照，各家還原略有差異。
+        拼音、注音採常見誦念讀法，與字典音不盡相同。
       </p>
     </div>
   );

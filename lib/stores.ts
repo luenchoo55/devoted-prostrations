@@ -83,8 +83,8 @@ export function setOffering(offering: boolean) {
 export const resetRitual = () => ritual.set(fresh(current().offering));
 
 // 大悲咒讀音標示
-export type DabeiMode = "py" | "zy" | "ro" | "none";
-const MODES: DabeiMode[] = ["py", "zy", "ro", "none"];
+export type DabeiMode = "py" | "zy" | "none";
+const MODES: DabeiMode[] = ["py", "zy", "none"];
 const dabeiMode = persisted<DabeiMode>(
   "tmg-dabei-mode",
   (raw) => (MODES.includes(raw as DabeiMode) ? (raw as DabeiMode) : "py"),

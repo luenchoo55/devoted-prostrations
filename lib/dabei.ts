@@ -86,19 +86,6 @@ export const DABEI: [string, string][] = [
   ["娑婆訶","suō pó hē"]
 ];
 
-// 梵文還原羅馬拼音，與 DABEI 逐句對照
-export const ROMAN: string[] = ["namo ratna-trayāya","namo āryā","valokite-śvarāya","bodhisattvāya","mahāsattvāya","mahā-kāruṇikāya","oṃ",
-  "sarva rabhaye","sudhanadasya","namo skṛtvā imaṃ āryā","valotkite-śvara raṃdhava","namo narakindi","hrīḥ mahāvadhasvame",
-  "sarva arthato śubhaṃ","ajeyaṃ","sarva sattva namo vasattva namo vāka","mavitato","tadyathā","oṃ avaloki","lokate","karate",
-  "e-hrīḥ","mahā bodhisattva","sarva sarva","mala mala","mahima hṛdayaṃ","kuru kuru karmaṃ","dhuru dhuru vijayate",
-  "mahā vijayate","dhara dhara","dhiriṇī","śvarāya","cala cala","mama vimala","muktele","ehi ehi","śina śina",
-  "āraṣaṃ pracali","viṣa viṣaṃ","prasaya","hulu hulu mara","hulu hulu hrīḥ","sara sara","siri siri","suru suru",
-  "bodhiya bodhiya","bodhaya bodhaya","maitriya","narakindi","dhṛṣṇina","bhayamana","svāhā","siddhāya","svāhā",
-  "mahā siddhāya","svāhā","siddha yoge","śvarāya","svāhā","narakindi","svāhā","māraṇara","svāhā","śira siṃha mukhāya",
-  "svāhā","sarva mahā asiddhāya","svāhā","cakra asiddhāya","svāhā","padma kastāya","svāhā","narakindi vagalāya","svāhā",
-  "mavari śankharāya","svāhā","namo ratna-trayāya","namo āryā","valokite","śvarāya","svāhā","oṃ siddhyantu","mantra",
-  "padāya","svāhā"];
-
 const ZY: Record<string, string> = {na:"ㄋㄚ",mo:"ㄇㄛ",he:"ㄏㄜ",la:"ㄌㄚ",da:"ㄉㄚ",duo:"ㄉㄨㄛ",ye:"ㄧㄝ",a:"ㄚ",li:"ㄌㄧ",po:"ㄆㄛ",lu:"ㄌㄨ",jie:"ㄐㄧㄝ",di:"ㄉㄧ",
   shuo:"ㄕㄨㄛ",bo:"ㄅㄛ",pu:"ㄆㄨ",ti:"ㄊㄧ",sa:"ㄙㄚ",jia:"ㄐㄧㄚ",ni:"ㄋㄧ",an:"ㄢ",fa:"ㄈㄚ",yi:"ㄧ",shu:"ㄕㄨ",xie:"ㄒㄧㄝ",xi:"ㄒㄧ",ji:"ㄐㄧ",
   meng:"ㄇㄥ",shi:"ㄕ",fo:"ㄈㄛ",leng:"ㄌㄥ",tuo:"ㄊㄨㄛ",jin:"ㄐㄧㄣ",chi:"ㄔ",mie:"ㄇㄧㄝ",ta:"ㄊㄚ",dou:"ㄉㄡ",peng:"ㄆㄥ",yun:"ㄩㄣ",qie:"ㄑㄧㄝ",
