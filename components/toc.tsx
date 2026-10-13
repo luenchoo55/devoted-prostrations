@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { activeSteps, STEP_LABELS } from "@/lib/ritual";
 import { useRitual } from "@/lib/stores";
+import { BgmPlayButton, BgmVolume } from "./bgm";
 
 const NUMERALS = "一二三四五六七八九十";
 const SUTRAS: [string, string][] = [
@@ -52,9 +53,15 @@ export function Toc() {
               {steps.filter((id) => done.includes(id)).length} / {steps.length}
             </span>
           </div>
-          <button type="button" className={`${item} text-sm text-muted`} onClick={() => go("bgm")}>
-            <span className="w-6 text-center" aria-hidden>♪</span>背景音樂
-          </button>
+          <div className="mb-1 grid gap-1 rounded-xl bg-gold-soft/40 px-2 py-2">
+            <div className="flex items-center gap-2">
+              <BgmPlayButton small />
+              <button type="button" className="min-w-0 flex-1 cursor-pointer truncate text-left text-sm" onClick={() => go("bgm")}>
+                背景音樂
+              </button>
+            </div>
+            <BgmVolume />
+          </div>
           <ol>
             {steps.map((id, i) => {
               const d = done.includes(id);

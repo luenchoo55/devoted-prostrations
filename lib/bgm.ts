@@ -19,7 +19,29 @@ const subscribe = (l: () => void) => {
 
 export const useBgm = () => useSyncExternalStore(subscribe, () => state, () => "idle" as BgmState);
 export const getBgm = () => state;
-export const registerBgm = (el: HTMLAudioElement | null) => { audio = el; };
+export const registerBgm = (el: HTMLAudioElement | null) => {
+  audio = el;
+  if (el) el.volume = getVolume();
+};
+
+// 音量 0～1，記在 localStorage，下次打開沿用
+const VOLUME_KEY = "tmg-bgm-volume";
+let volume: number | undefined;
+const getVolume = () => {
+  if (volume === undefined) {
+    let v = NaN;
+    try { v = Number(localStorage.getItem(VOLUME_KEY) ?? NaN); } catch {}
+    volume = Number.isFinite(v) && v >= 0 && v <= 1 ? v : 0.6;
+  }
+  return volume;
+};
+export const useBgmVolume = () => useSyncExternalStore(subscribe, getVolume, () => 0.6);
+export function setBgmVolume(v: number) {
+  volume = Math.min(1, Math.max(0, v));
+  if (audio) audio.volume = volume;
+  try { localStorage.setItem(VOLUME_KEY, String(volume)); } catch {}
+  listeners.forEach((l) => l());
+}
 
 export function playBgm() {
   if (!audio) return Promise.reject();

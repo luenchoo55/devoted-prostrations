@@ -37,11 +37,41 @@ export function Phrased({ text }: { text: string }) {
   ));
 }
 
-// p：散文段落；v：偈頌（逐行）；n：佛號列表
+// h：分段標題（如金剛經三十二分）；p：散文段落；v：偈頌（逐行）；n：佛號列表
 export function ScriptureBody({ k }: { k: TextKey }) {
+  const blocks = TEXTS[k] as Block[];
+  const heads = blocks.filter(([kind]) => kind === "h").map(([, v]) => v as string);
+  let h = 0;
   return (
     <div className="grid gap-4 font-display text-[1.1875rem] leading-[1.95]">
-      {(TEXTS[k] as Block[]).map(([kind, v], i) => {
+      {heads.length > 0 && (
+        <nav aria-label="分段跳轉" className="rounded-xl bg-gold-soft/50 p-3 font-sans">
+          <div className="mb-2 text-[0.8125rem] text-muted">跳到第幾分</div>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(2.75rem,1fr))] gap-1.5">
+            {heads.map((name, i) => (
+              <a
+                key={name}
+                href={`#${k}-${i + 1}`}
+                title={name}
+                className="rounded-md border border-line bg-paper py-1 text-center text-[0.8125rem] leading-normal text-ink no-underline hover:border-kasaya hover:text-kasaya"
+              >
+                {name.split("第")[1]}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
+      {blocks.map(([kind, v], i) => {
+        if (kind === "h") {
+          h++;
+          return (
+            <h4 key={i} id={`${k}-${h}`} className="mt-3 flex scroll-mt-6 items-center gap-3 text-base font-bold tracking-wider text-kasaya">
+              <span aria-hidden className="h-px flex-1 bg-line" />
+              {v as string}
+              <span aria-hidden className="h-px flex-1 bg-line" />
+            </h4>
+          );
+        }
         if (kind === "n")
           return (
             <div key={i} className="grid grid-cols-[repeat(auto-fill,minmax(11em,1fr))] gap-x-3.5 gap-y-0.5 text-lg leading-[1.9]">
