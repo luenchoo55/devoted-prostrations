@@ -1,3 +1,4 @@
+import { Bgm } from "@/components/bgm";
 import { Dabei } from "@/components/dabei";
 import { EclipseTable } from "@/components/eclipse-table";
 import { EclipseDisc, HeaderTools } from "@/components/header-tools";
@@ -47,10 +48,7 @@ export default function Home() {
           <HeaderTools />
         </header>
 
-        <div className="mt-6 rounded-xl border border-dashed border-line px-4 py-3">
-          <div className="text-[13px] tracking-widest text-muted">念經前 · 暖場音樂</div>
-          <VideoRow href={LINKS.prelude} label="暖場音樂" />
-        </div>
+        <Bgm />
 
         <ol className="mt-7 grid">
           <Step id="lamp" title="頂禮點燈開智慧">

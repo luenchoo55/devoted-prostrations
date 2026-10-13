@@ -107,6 +107,7 @@ export function HeaderTools() {
             <button
               type="button"
               aria-expanded={eclipseVideo.open}
+              data-chant
               onClick={eclipseVideo.toggle}
               className={`${btn} flex items-center gap-1.5 ${eclipseVideo.open ? "border-kasaya text-kasaya" : "border-kasaya bg-kasaya text-paper"}`}
             >

@@ -42,6 +42,7 @@ export function SutraCard({
           <button
             type="button"
             aria-expanded={video.open}
+            data-chant
             onClick={video.toggle}
             className={`flex flex-none cursor-pointer items-center gap-1 rounded-full px-3.5 py-1.5 text-sm font-medium transition-opacity hover:opacity-90 max-[420px]:px-2.5 max-[420px]:py-2.5 ${
               video.open ? "border border-kasaya text-kasaya" : "bg-kasaya text-paper"

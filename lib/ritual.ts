@@ -9,7 +9,6 @@ export const MANTRA_TIMES = 7;
 export const VAJRA_TIMES = 3;
 
 export const LINKS = {
-  prelude: "https://youtu.be/H_qzDvWhB2A?si=hHwk8tXDVwK5rvEh",
   diamond: "https://www.youtube.com/watch?v=ATOWBwCcXgk",
   pumen: "https://www.youtube.com/watch?v=tukLNS8vUYU&t=1s",
   b88: "https://www.youtube.com/watch?v=LDffkmSgUm8&t=1277s",

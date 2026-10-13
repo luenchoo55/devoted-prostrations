@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { stopBgm } from "./bgm";
 import { MANTRA_TIMES, VAJRA_TIMES, type StepId } from "./ritual";
 
 // 存在 localStorage 的小型 store；伺服器端與 hydration 時一律用 serverValue，避免畫面不一致
@@ -62,6 +63,7 @@ export const COUNTER_TIMES: Record<Counter, number> = { mantra: MANTRA_TIMES, va
 
 // 念滿遍數即自動勾選該步驟
 export function tapCounter(id: Counter) {
+  stopBgm();
   const s = current();
   const n = Math.min(s.counts[id] + 1, COUNTER_TIMES[id]);
   const done = n === COUNTER_TIMES[id] && !s.done.includes(id) ? [...s.done, id] : s.done;

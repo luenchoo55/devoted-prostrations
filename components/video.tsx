@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { stopBgm } from "@/lib/bgm";
 import { toEmbed } from "@/lib/youtube";
 import { card } from "./ui";
 
@@ -8,6 +9,7 @@ import { card } from "./ui";
 let playing: string | null = null;
 const listeners = new Set<() => void>();
 const setPlaying = (key: string | null) => {
+  if (key) stopBgm();
   playing = key;
   listeners.forEach((l) => l());
 };
@@ -55,6 +57,7 @@ export function VideoRow({ href, label, videoKey }: { href: string; label: strin
       <button
         type="button"
         aria-expanded={open}
+        data-chant
         onClick={toggle}
         className="flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-gold-soft/40"
       >

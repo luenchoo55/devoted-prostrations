@@ -56,6 +56,7 @@ export function MantraCounter({ id, zh, lat }: { id: Counter; zh: string; lat: s
       <div className="flex flex-wrap items-center gap-2.5">
         <button
           type="button"
+          data-chant
           onClick={() => tapCounter(id)}
           className="cursor-pointer rounded-full border border-gold bg-gold-soft px-4 py-1.5 text-[15px] active:scale-95"
         >
@@ -91,6 +92,7 @@ export function CundiMonths() {
             key={n}
             type="button"
             aria-pressed={i === sel}
+            data-chant
             onClick={() => { setPicked(i); video.show(); }}
             className={`cursor-pointer rounded-lg border py-1.5 text-center text-sm ${
               i === sel ? "border-kasaya bg-kasaya font-bold text-paper" : i === m ? "border-kasaya bg-paper font-bold text-kasaya" : "border-line bg-paper text-muted"
