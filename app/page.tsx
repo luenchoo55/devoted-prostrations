@@ -127,15 +127,36 @@ export default function Home() {
             <EclipseDisc />
             月食修持
           </h2>
-          <p className="text-muted">
-            根據密續教言，月食出現時我們體內的氣與明點會入於中脈，此時念誦《普賢王如來發願偈》，功德極大。
-          </p>
+          <div className="grid gap-2 text-muted">
+            <p>
+              《普賢王如來祈願文》出自寧瑪派大圓滿密續《密意通徹》。願文中說：「或於日月蝕時日，風暴雷發地動變，或於冬夏至年節，發心自修為普賢，與眾虔敬誦此願」，能令三界有情解脫。因此月食時念誦此願文，是殊勝的修持時機。
+            </p>
+            <p>藏傳密續（如時輪金剛）的教法認為，日月食時外在的日、月相應於身內的脈與氣，氣較容易進入中脈，所以這時修持的力量特別大。</p>
+          </div>
           <VideoRow href={LINKS.pxw} label="普賢王如來祈禱能顯自然智根本願文" />
           <Scroll summary="願文 經文">
             <ScriptureBody k="pxw" />
           </Scroll>
+          <Scroll summary="月食小知識">
+            <ul className="grid list-disc gap-1.5 pl-5 text-[0.9375rem] leading-relaxed">
+              <li>月食只發生在滿月（農曆十五前後），太陽、地球、月亮排成一直線，月亮走進地球的影子。</li>
+              <li>
+                <b>月全食</b>：月亮整個進入地球本影，通常呈暗紅銅色，俗稱「血月」。
+              </li>
+              <li>
+                <b>月偏食</b>：月亮只有一部分進入本影，看起來像被咬掉一塊。
+              </li>
+              <li>
+                <b>半影月食</b>：月亮只進入較淡的半影，月面只是略微變暗，肉眼不太容易察覺。
+              </li>
+              <li>月食時只要月亮在地平線上，各地都能同時看到；台灣看不看得到，取決於當時月亮是否已經升起（白天就看不到）。</li>
+              <li>表中時間是「食甚」，也就是食得最深的時刻；整個過程（含半影）常長達四到六小時。</li>
+            </ul>
+          </Scroll>
           <EclipseTable />
-          <p className="text-[0.8125rem] text-muted">月食前 14 天起，打開此頁會跳出提醒。時間為約略值，依 NASA 月食表換算。</p>
+          <p className="text-[0.8125rem] text-muted">
+            月食前 14 天起，打開此頁會跳出提醒。日期、食甚時間與類型已依 NASA 月食表（Espenak）核對，換算為台灣時間；「台灣」一欄為依月出月落推估的大致可見情形。
+          </p>
         </section>
 
         <Toc />
