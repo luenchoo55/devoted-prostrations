@@ -54,7 +54,7 @@ export default function Home() {
 
         <ol className="mt-7 grid">
           <Step id="lamp" title="頂禮點燈開智慧">
-            <Note>點酥油燈，念經前記得焚香。</Note>
+            <Note>頂禮後，點燃酥油燈，在念經前記得焚香。</Note>
             <p className="inline-block rounded-md bg-gold-soft px-2.5 py-0.5 text-sm">手不可碰燈芯</p>
             <ProstrationGuide />
           </Step>
