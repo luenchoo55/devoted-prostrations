@@ -42,7 +42,7 @@ export function Player({ href, title }: { href: string; title: string }) {
         allowFullScreen
         className="aspect-video w-full rounded-lg border-0 bg-black"
       />
-      <a href={href} target="_blank" rel="noopener" className="justify-self-end text-[13px] text-muted">
+      <a href={href} target="_blank" rel="noopener" className="justify-self-end text-[0.8125rem] text-muted">
         在 YouTube 開啟 ↗
       </a>
     </div>
@@ -62,7 +62,7 @@ export function VideoRow({ href, label, videoKey }: { href: string; label: strin
         className="flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-gold-soft/40"
       >
         <span className="min-w-0">{label}</span>
-        <span className="flex flex-none items-center gap-1 text-[13px] font-bold text-kasaya">
+        <span className="flex flex-none items-center gap-1 text-[0.8125rem] font-bold text-kasaya">
           {open ? "收起 ▴" : <><PlayIcon className="size-3" />播放</>}
         </span>
       </button>

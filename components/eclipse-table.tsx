@@ -8,7 +8,7 @@ export function EclipseTable() {
   const next = now === null ? undefined : nextEclipse(now);
   return (
     <div className="overflow-x-auto">
-      <table className="w-full border-collapse text-sm tabular-nums [&_td]:border-b [&_td]:border-line [&_td]:px-1.5 [&_td]:py-[7px] [&_td]:align-top [&_th]:border-b [&_th]:border-line [&_th]:px-1.5 [&_th]:py-[7px] [&_th]:text-left [&_th]:text-[13px] [&_th]:font-medium [&_th]:text-muted">
+      <table className="w-full border-collapse text-sm tabular-nums [&_td]:border-b [&_td]:border-line [&_td]:px-1.5 [&_td]:py-[0.4375rem] [&_td]:align-top [&_th]:border-b [&_th]:border-line [&_th]:px-1.5 [&_th]:py-[0.4375rem] [&_th]:text-left [&_th]:text-[0.8125rem] [&_th]:font-medium [&_th]:text-muted">
         <thead>
           <tr>
             <th>日期</th>

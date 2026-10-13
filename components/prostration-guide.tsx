@@ -59,14 +59,14 @@ export function ProstrationGuide() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex cursor-pointer items-center gap-1.5 text-[15px] text-kasaya underline decoration-dotted underline-offset-4"
+        className="flex cursor-pointer items-center gap-1.5 text-[0.9375rem] text-kasaya underline decoration-dotted underline-offset-4"
       >
         如何身口意頂禮？教學 ▸
       </button>
 
       {open && (
         <Modal labelledBy="guide-title" onClose={close}>
-          <div className="text-[13px] font-bold tracking-[.18em] text-gold">身口意頂禮 · {i + 1} / {STEPS.length}</div>
+          <div className="text-[0.8125rem] font-bold tracking-[.18em] text-gold">身口意頂禮 · {i + 1} / {STEPS.length}</div>
           {step.point || step.hands ? (
             <Figure point={step.point} hands={step.hands} />
           ) : (
@@ -88,7 +88,7 @@ export function ProstrationGuide() {
             ))}
           </div>
 
-          {last && <p className="text-[13px] text-muted">頂禮時心中專注於所皈依的對象。各傳承細節略有不同，以上師所教為準。</p>}
+          {last && <p className="text-[0.8125rem] text-muted">頂禮時心中專注於所皈依的對象。各傳承細節略有不同，以上師所教為準。</p>}
 
           <div className="mt-1.5 flex justify-center gap-2">
             <button type="button" className={`${modalBtn} border-line disabled:opacity-40`} disabled={i === 0} onClick={() => setI(i - 1)}>

@@ -14,10 +14,10 @@ export function Step({ id, title, children }: { id: StepId; title: string; child
   if (index < 0) return null;
   const d = done.includes(id);
   return (
-    <li className="group/step relative grid grid-cols-[44px_1fr] gap-3.5 pb-8">
-      <span aria-hidden className="absolute top-[46px] bottom-1 left-[21px] w-0.5 bg-line group-last/step:hidden" />
+    <li className="group/step relative grid grid-cols-[2.75rem_1fr] gap-3.5 pb-8">
+      <span aria-hidden className="absolute top-[2.875rem] bottom-1 left-[1.3125rem] w-0.5 bg-line group-last/step:hidden" />
       <div
-        className={`grid size-11 place-items-center rounded-[10px] border-2 border-kasaya font-display text-xl font-bold transition-colors ${
+        className={`grid size-11 place-items-center rounded-[0.625rem] border-2 border-kasaya font-display text-xl font-bold transition-colors ${
           d ? "bg-kasaya text-paper" : "bg-paper text-kasaya"
         }`}
       >
@@ -25,14 +25,14 @@ export function Step({ id, title, children }: { id: StepId; title: string; child
       </div>
       <div className="min-w-0">
         <div className="flex items-start justify-between gap-2.5">
-          <h2 className={`mt-1.5 mb-1 font-display text-[22px] leading-snug font-bold text-balance ${d ? "text-muted" : ""}`}>
+          <h2 className={`mt-1.5 mb-1 font-display text-[1.375rem] leading-snug font-bold text-balance ${d ? "text-muted" : ""}`}>
             {title}
           </h2>
           <button
             type="button"
             aria-pressed={d}
             onClick={() => toggleStep(id)}
-            className={`mt-1.5 flex-none cursor-pointer rounded-full border bg-paper px-3 py-0.5 text-[13px] ${
+            className={`mt-1.5 flex-none cursor-pointer rounded-full border bg-paper px-3 py-0.5 text-[0.8125rem] ${
               d ? "border-done text-done" : "border-line text-muted"
             }`}
           >
@@ -51,20 +51,20 @@ export function MantraCounter({ id, zh, lat }: { id: Counter; zh: string; lat: s
   const total = COUNTER_TIMES[id];
   return (
     <div className={`${card} mt-2 p-4`}>
-      <p className="font-display text-[21px] leading-[1.8]">{zh}</p>
+      <p className="font-display text-[1.3125rem] leading-[1.8]">{zh}</p>
       <p className="mt-1 mb-3 text-sm text-muted italic">{lat}</p>
       <div className="flex flex-wrap items-center gap-2.5">
         <button
           type="button"
           data-chant
           onClick={() => tapCounter(id)}
-          className="cursor-pointer rounded-full border border-gold bg-gold-soft px-4 py-1.5 text-[15px] active:scale-95"
+          className="cursor-pointer rounded-full border border-gold bg-gold-soft px-4 py-1.5 text-[0.9375rem] active:scale-95"
         >
           {n >= total ? `${NUMERALS[total - 1]}遍圓滿` : "念一遍"}
         </button>
-        <div className="flex gap-[7px]" aria-hidden>
+        <div className="flex gap-[0.4375rem]" aria-hidden>
           {Array.from({ length: total }, (_, i) => (
-            <span key={i} className={`size-[18px] rounded-full border-2 border-gold transition-colors ${i < n ? "bg-gold" : ""}`} />
+            <span key={i} className={`size-[1.125rem] rounded-full border-2 border-gold transition-colors ${i < n ? "bg-gold" : ""}`} />
           ))}
         </div>
         <span className="text-sm text-muted tabular-nums">

@@ -36,7 +36,7 @@ export function HeaderTools() {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-20 h-[3px] bg-line/60" aria-hidden>
+      <div className="fixed inset-x-0 top-0 z-20 h-[0.1875rem] bg-line/60" aria-hidden>
         <div className="h-full bg-kasaya transition-[width] duration-500" style={{ width: `${(finished / steps.length) * 100}%` }} />
       </div>
 
@@ -65,7 +65,7 @@ export function HeaderTools() {
 
       {offering === null && (
         <Modal labelledBy="offering-title">
-          <span aria-hidden className="mx-auto grid size-14 place-items-center rounded-xl border-2 border-kasaya font-display text-[28px] font-bold text-kasaya">
+          <span aria-hidden className="mx-auto grid size-14 place-items-center rounded-xl border-2 border-kasaya font-display text-[1.75rem] font-bold text-kasaya">
             供
           </span>
           <h3 id="offering-title" className="font-display text-2xl leading-snug">今天有準備供品嗎？</h3>
@@ -74,7 +74,7 @@ export function HeaderTools() {
             <br />
             <b className="text-kasaya">「金剛薩埵百字明咒」三遍</b>
           </p>
-          <p className="text-[13px] text-muted">之後可以在上方「有供品／無供品」切換</p>
+          <p className="text-[0.8125rem] text-muted">之後可以在上方「有供品／無供品」切換</p>
           <div className="mt-1.5 flex flex-wrap justify-center gap-2">
             <button type="button" autoFocus className={`${btn} border-kasaya bg-kasaya text-paper`} onClick={() => setOffering(true)}>
               有供品
@@ -98,7 +98,7 @@ export function HeaderTools() {
           <p className="text-lg font-bold text-kasaya tabular-nums">
             {fmtDate(next.t)} 食甚 {fmtTime(next.t)}
           </p>
-          <p className="text-[13px] text-muted">
+          <p className="text-[0.8125rem] text-muted">
             {next.type} · 台灣{next.vis}
           </p>
           <p>月食時念誦《普賢王如來發願偈》，功德極大。</p>
@@ -152,7 +152,7 @@ function WakeLockChip() {
   );
 }
 
-export function EclipseDisc({ className = "size-[26px]" }: { className?: string }) {
+export function EclipseDisc({ className = "size-[1.625rem]" }: { className?: string }) {
   return (
     <span
       aria-hidden

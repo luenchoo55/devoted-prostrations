@@ -10,7 +10,7 @@ export function Dabei() {
   return (
     <div className="grid gap-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <span className="text-[13px] text-muted">讀音標示</span>
+        <span className="text-[0.8125rem] text-muted">讀音標示</span>
         <div role="group" aria-label="讀音標示" className="inline-flex overflow-hidden rounded-full border border-line">
           {MODES.map(([m, label]) => (
             <button
@@ -30,9 +30,9 @@ export function Dabei() {
         {DABEI.map(([hz, py], i) => {
           const syl = py.split(" ");
           return (
-            <li key={i} className="grid grid-cols-[2.2em_1fr] items-end gap-1.5 border-b border-dotted border-line py-[3px]">
+            <li key={i} className="grid grid-cols-[2.2em_1fr] items-end gap-1.5 border-b border-dotted border-line py-[0.1875rem]">
               <span className="pb-1.5 text-xs text-gold tabular-nums">{i + 1}</span>
-              <span className="flex min-w-0 flex-wrap gap-x-0.5 font-display text-[22px] leading-normal">
+              <span className="flex min-w-0 flex-wrap gap-x-0.5 font-display text-[1.375rem] leading-normal">
                 {[...hz].map((c, j) => {
                   const p = syl[j] ?? "";
                   const rt = mode === "py" ? p : mode === "zy" && p ? toZhuyin(p) : null;
@@ -45,13 +45,13 @@ export function Dabei() {
                 })}
               </span>
               {mode === "ro" && (
-                <span className="col-start-2 min-w-0 pb-1 text-[15px] leading-normal break-words text-kasaya italic">{ROMAN[i]}</span>
+                <span className="col-start-2 min-w-0 pb-1 text-[0.9375rem] leading-normal break-words text-kasaya italic">{ROMAN[i]}</span>
               )}
             </li>
           );
         })}
       </ol>
-      <p className="text-[13px] text-muted">
+      <p className="text-[0.8125rem] text-muted">
         拼音、注音採常見誦念讀法，與字典音不盡相同。羅馬拼音為梵文還原的通行版本，逐句對照，各家還原略有差異。
       </p>
     </div>

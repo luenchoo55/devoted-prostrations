@@ -25,13 +25,13 @@ function Refuge() {
 export default function Home() {
   return (
     <div className="px-4">
-      <main className="mx-auto max-w-[640px] pt-7 pb-16">
+      <main className="mx-auto max-w-[40rem] pt-7 pb-16">
         <header className="grid gap-1.5 border-b border-line pb-6">
           <div className="flex items-start justify-between gap-4">
             <div className="grid min-w-0 gap-1.5">
-              <div className="text-[13px] font-bold tracking-[.18em] text-gold">每週三 · 天滿宮</div>
-              <h1 className="font-display text-[clamp(30px,8vw,42px)] leading-tight font-bold text-balance">在天滿宮虔誠磕頭</h1>
-              <p className="font-display text-[17px] tracking-wide text-kasaya italic">Devoted Prostrations at Divine Space</p>
+              <div className="text-[0.8125rem] font-bold tracking-[.18em] text-gold">每週三 · 天滿宮</div>
+              <h1 className="font-display text-[clamp(1.875rem,8vw,2.625rem)] leading-tight font-bold text-balance">在天滿宮虔誠磕頭</h1>
+              <p className="font-display text-[1.0625rem] tracking-wide text-kasaya italic">Devoted Prostrations at Divine Space</p>
             </div>
             <div className="flex flex-none flex-col items-center gap-3">
               <ThemeToggle />
@@ -44,7 +44,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <p className="text-[15px] text-muted">依序進行，完成一項就點「完成」。</p>
+          <p className="text-[0.9375rem] text-muted">依序進行，完成一項就點「完成」。</p>
           <HeaderTools />
         </header>
 
@@ -122,7 +122,7 @@ export default function Home() {
         </ol>
 
         <section className={`${card} mt-1.5 grid gap-2.5 border-gold p-5`}>
-          <h2 className="flex items-center gap-2.5 font-display text-[22px] font-bold">
+          <h2 className="flex items-center gap-2.5 font-display text-[1.375rem] font-bold">
             <EclipseDisc />
             月食修持
           </h2>
@@ -134,10 +134,10 @@ export default function Home() {
             <ScriptureBody k="pxw" />
           </Scroll>
           <EclipseTable />
-          <p className="text-[13px] text-muted">月食前 14 天起，打開此頁會跳出提醒。時間為約略值，依 NASA 月食表換算。</p>
+          <p className="text-[0.8125rem] text-muted">月食前 14 天起，打開此頁會跳出提醒。時間為約略值，依 NASA 月食表換算。</p>
         </section>
 
-        <footer className="mt-2.5 text-center text-[13px] text-muted">功德圓滿 · 南無阿彌陀佛</footer>
+        <footer className="mt-2.5 text-center text-[0.8125rem] text-muted">功德圓滿 · 南無阿彌陀佛</footer>
       </main>
     </div>
   );

@@ -57,6 +57,17 @@
   --font-sans: var(--font-noto-sans), "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
 }
 
+/* 投影到電視：整頁依螢幕寬度等比放大（所有尺寸都以 rem 計） */
+@media (min-width: 1280px) {
+  html { font-size: 125%; }
+}
+@media (min-width: 1600px) {
+  html { font-size: 150%; }
+}
+@media (min-width: 2400px) {
+  html { font-size: 225%; }
+}
+
 body {
   background: var(--rice);
   color: var(--ink);
@@ -84,14 +95,14 @@ summary::-webkit-details-marker {
 }
 .dharani rt {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--muted);
   line-height: 1.3;
   white-space: nowrap;
   letter-spacing: 0;
 }
 .dharani[data-mode="zy"] rt {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

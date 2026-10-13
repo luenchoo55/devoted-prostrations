@@ -55,15 +55,15 @@ export function Bgm() {
         )}
       </button>
       <div className="min-w-0 flex-1">
-        <div className="text-[13px] tracking-widest text-muted">念經前 · 背景音樂</div>
-        <div className="truncate font-display text-[17px]">聖救度佛母二十一種禮讚經</div>
+        <div className="text-[0.8125rem] tracking-widest text-muted">念經前 · 背景音樂</div>
+        <div className="truncate font-display text-[1.0625rem]">聖救度佛母二十一種禮讚經</div>
         <div className="text-xs text-muted">{STATUS[state]}</div>
       </div>
       {playing && (
         // 播放中的小音柱
-        <div className="flex h-5 flex-none items-end gap-[3px]" aria-hidden>
+        <div className="flex h-5 flex-none items-end gap-[0.1875rem]" aria-hidden>
           {[0, 0.2, 0.4].map((d) => (
-            <span key={d} className="w-[3px] animate-pulse rounded-full bg-gold" style={{ height: `${60 + d * 80}%`, animationDelay: `${d}s` }} />
+            <span key={d} className="w-[0.1875rem] animate-pulse rounded-full bg-gold" style={{ height: `${60 + d * 80}%`, animationDelay: `${d}s` }} />
           ))}
         </div>
       )}

@@ -36,7 +36,7 @@ export function SutraCard({
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="font-display text-lg leading-snug font-bold">{title}</h3>
-          <p className="truncate text-[13px] text-muted">{meta}</p>
+          <p className="truncate text-[0.8125rem] text-muted">{meta}</p>
         </div>
         {href && (
           <button
