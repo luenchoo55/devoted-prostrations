@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { activeSteps, LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
@@ -21,8 +21,7 @@ export function HeaderTools() {
   // null：依「14 天內且本次開頁未看過」自動決定；true/false：使用者手動開關
   const [eclipseOpen, setEclipseOpen] = useState<boolean | null>(null);
   // 每次打開先跳共修倒數，關掉後才問供品、提醒月食
-  const [sessionOpen, setSessionOpen] = useState(true);
-  const showSession = sessionOpen && now !== null;
+  const showSession = useSessionModal() && now !== null;
   const autoEclipse = (() => {
     if (!next || now === null) return false;
     let seen = null;
@@ -66,7 +65,7 @@ export function HeaderTools() {
         </span>
       </div>
 
-      {showSession && <SessionModal onClose={() => setSessionOpen(false)} />}
+      {showSession && <SessionModal onClose={() => setSessionModal(false)} />}
 
       {!showSession && offering === null && (
         <Modal labelledBy="offering-title">
@@ -126,6 +125,19 @@ export function HeaderTools() {
       )}
     </>
   );
+}
+
+// 共修倒數彈窗的開關：打開頁面時預設開啟，右下角按鈕也能再打開
+let sessionModal = true;
+const sessionListeners = new Set<() => void>();
+const subscribeSession = (l: () => void) => {
+  sessionListeners.add(l);
+  return () => { sessionListeners.delete(l); };
+};
+export const useSessionModal = () => useSyncExternalStore(subscribeSession, () => sessionModal, () => true);
+export function setSessionModal(open: boolean) {
+  sessionModal = open;
+  sessionListeners.forEach((l) => l());
 }
 
 // 共修倒數：每秒更新

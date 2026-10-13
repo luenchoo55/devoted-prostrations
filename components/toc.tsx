@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { activeSteps, STEP_LABELS } from "@/lib/ritual";
 import { useRitual } from "@/lib/stores";
 import { BgmPlayButton, BgmVolume } from "./bgm";
+import { setSessionModal } from "./header-tools";
 
 const NUMERALS = "一二三四五六七八九十";
 const SUTRAS: [string, string][] = [
@@ -103,6 +104,19 @@ export function Toc() {
           </button>
         </nav>
       )}
+
+      <button
+        type="button"
+        aria-label="共修倒數"
+        title="共修倒數"
+        onClick={() => { setOpen(false); setSessionModal(true); }}
+        className="grid size-12 cursor-pointer place-items-center rounded-full border-2 border-kasaya bg-paper text-kasaya shadow-[0_0.25rem_1rem_rgba(20,14,10,.18)] transition-transform hover:scale-105 active:scale-95"
+      >
+        <svg viewBox="0 0 24 24" className="size-[1.375rem]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <circle cx="12" cy="13" r="8" />
+          <path d="M12 9v4l2.5 2.5M9.5 2.5h5M19 5.5l-1.5 1.5" />
+        </svg>
+      </button>
 
       <button
         type="button"

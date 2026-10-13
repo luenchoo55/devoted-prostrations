@@ -33,7 +33,7 @@ function Refuge() {
 export default function Home() {
   return (
     <div className="px-4">
-      <main className="mx-auto max-w-[40rem] pt-7 pb-24">
+      <main className="mx-auto max-w-[40rem] pt-7 pb-36">
         <header className="grid gap-1.5 border-b border-line pb-6">
           <div className="flex items-start justify-between gap-4">
             <div className="grid min-w-0 gap-1.5">
