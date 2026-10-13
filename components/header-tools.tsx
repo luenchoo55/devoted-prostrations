@@ -5,6 +5,7 @@ import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { activeSteps, LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
 import { Modal, modalBtn as btn } from "./modal";
+import { PlayIcon, Player, useVideo } from "./video";
 
 const chip = "cursor-pointer rounded-full border bg-paper px-3.5 py-1.5 text-sm";
 const SEEN_KEY = "tmg-ecl-seen";
@@ -26,7 +27,9 @@ export function HeaderTools() {
   })();
   // 先問供品，再提醒月食
   const showEclipse = offering !== null && (eclipseOpen ?? autoEclipse);
+  const eclipseVideo = useVideo("eclipse-modal");
   const closeEclipse = () => {
+    if (eclipseVideo.open) eclipseVideo.toggle();
     setEclipseOpen(false);
     try { sessionStorage.setItem(SEEN_KEY, String(next?.t ?? "")); } catch {}
   };
@@ -99,10 +102,16 @@ export function HeaderTools() {
             {next.type} · 台灣{next.vis}
           </p>
           <p>月食時念誦《普賢王如來發願偈》，功德極大。</p>
+          {eclipseVideo.open && <Player href={LINKS.pxw} title="普賢王如來祈禱能顯自然智根本願文" />}
           <div className="mt-1.5 flex flex-wrap justify-center gap-2">
-            <a className={`${btn} border-kasaya bg-kasaya text-paper`} href={LINKS.pxw} target="_blank" rel="noopener">
-              播放願文
-            </a>
+            <button
+              type="button"
+              aria-expanded={eclipseVideo.open}
+              onClick={eclipseVideo.toggle}
+              className={`${btn} flex items-center gap-1.5 ${eclipseVideo.open ? "border-kasaya text-kasaya" : "border-kasaya bg-kasaya text-paper"}`}
+            >
+              {eclipseVideo.open ? "收起影片" : <><PlayIcon />播放願文</>}
+            </button>
             <button type="button" autoFocus className={`${btn} border-line`} onClick={closeEclipse}>
               知道了
             </button>

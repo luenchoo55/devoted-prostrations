@@ -16,7 +16,7 @@ export function Modal({ labelledBy, onClose, children }: { labelledBy: string; o
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
-        className="grid w-full max-w-[420px] gap-2.5 rounded-[18px] border border-gold bg-paper px-[22px] pt-[26px] pb-5 text-center text-ink"
+        className="grid max-h-[calc(100dvh-2rem)] w-full max-w-[420px] gap-2.5 overflow-y-auto rounded-[18px] border border-gold bg-paper px-[22px] pt-[26px] pb-5 text-center text-ink"
       >
         {children}
       </div>
