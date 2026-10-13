@@ -2,6 +2,7 @@ import { Bgm } from "@/components/bgm";
 import { Dabei } from "@/components/dabei";
 import { EclipseTable } from "@/components/eclipse-table";
 import { EclipseDisc, HeaderTools } from "@/components/header-tools";
+import { LocationButton } from "@/components/location";
 import { ProstrationGuide } from "@/components/prostration-guide";
 import { CundiMonths, MantraCounter, Step } from "@/components/ritual";
 import { SutraCard } from "@/components/sutra-card";
@@ -42,7 +43,10 @@ export default function Home() {
               <p className="font-display text-[1.0625rem] tracking-wide text-kasaya italic">Devoted Prostrations at Divine Space</p>
             </div>
             <div className="flex flex-none flex-col items-center gap-3">
-              <ThemeToggle />
+              <div className="flex gap-2">
+                <LocationButton />
+                <ThemeToggle />
+              </div>
               {/* 朱印 */}
               <div
                 aria-hidden
