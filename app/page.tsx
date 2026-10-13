@@ -9,7 +9,6 @@ import { CundiMonths, MantraCounter, Step } from "@/components/ritual";
 import { SutraCard } from "@/components/sutra-card";
 import { Toc } from "@/components/toc";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { VideoRow } from "@/components/video";
 import { card, Note, Scroll, ScriptureBody, Verses } from "@/components/ui";
 import { SOLAR_ECLIPSES } from "@/lib/eclipse";
 import { LINKS } from "@/lib/ritual";
@@ -134,10 +133,9 @@ export default function Home() {
             </p>
             <p>藏傳密續（如時輪金剛）的教法認為，日月食時外在的日、月相應於身內的脈與氣，氣較容易進入中脈，所以這時修持的力量特別大。</p>
           </div>
-          <VideoRow href={LINKS.pxw} label="普賢王如來祈禱能顯自然智根本願文" />
-          <Scroll summary="願文 經文">
+          <SutraCard id="sutra-pxw" glyph="願" title="普賢王如來祈願文" meta="普賢王如來祈禱能顯自然智根本願文" href={LINKS.pxw}>
             <ScriptureBody k="pxw" />
-          </Scroll>
+          </SutraCard>
           <Scroll summary="月食小知識">
             <ul className="grid list-disc gap-1.5 pl-5 text-[0.9375rem] leading-relaxed">
               <li>月食只發生在滿月（農曆十五前後），太陽、地球、月亮排成一直線，月亮走進地球的影子。</li>
