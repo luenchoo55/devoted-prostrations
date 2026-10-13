@@ -26,10 +26,21 @@ export function Scroll({ summary, open, children }: { summary: string; open?: bo
   );
 }
 
+// 依標點切成短句，每句不從中間斷行：換行只會落在標點之後，誦念時比較好跟
+const PHRASE = /[^，。；：！？　]+[，。；：！？　]*[」』]*/g;
+
+export function Phrased({ text }: { text: string }) {
+  return (text.match(PHRASE) ?? [text]).map((p, i) => (
+    <span key={i} className="inline-block">
+      {p}
+    </span>
+  ));
+}
+
 // p：散文段落；v：偈頌（逐行）；n：佛號列表
 export function ScriptureBody({ k }: { k: TextKey }) {
   return (
-    <div className="grid gap-3 font-display text-[1.1875rem] leading-[1.95]">
+    <div className="grid gap-4 font-display text-[1.1875rem] leading-[1.95]">
       {(TEXTS[k] as Block[]).map(([kind, v], i) => {
         if (kind === "n")
           return (
@@ -41,18 +52,37 @@ export function ScriptureBody({ k }: { k: TextKey }) {
           );
         if (kind === "v")
           return (
-            <p key={i} className="border-l-3 border-gold-soft pl-3">
+            <div key={i} className="grid gap-1 border-l-3 border-gold-soft pl-3">
               {(v as string[]).map((line, j) => (
-                <span key={j} className="block">{line}</span>
+                <p key={j}>
+                  <Phrased text={line} />
+                </p>
               ))}
-            </p>
+            </div>
           );
-        return <p key={i}>{v as string}</p>;
+        return (
+          <p key={i}>
+            <Phrased text={v as string} />
+          </p>
+        );
       })}
     </div>
   );
 }
 
-export function Verses({ children }: { children: ReactNode }) {
-  return <div className="grid gap-3.5 border-l-3 border-gold px-4 py-1.5 font-display text-[1.1875rem] leading-[1.9]">{children}</div>;
+// 偈頌：每段一組，每組逐行
+export function Verses({ stanzas }: { stanzas: string[][] }) {
+  return (
+    <div className="grid gap-4 border-l-3 border-gold px-4 py-1.5 font-display text-[1.1875rem] leading-[1.9]">
+      {stanzas.map((lines, i) => (
+        <div key={i} className="grid gap-1">
+          {lines.map((line, j) => (
+            <p key={j}>
+              <Phrased text={line} />
+            </p>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
 }
