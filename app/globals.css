@@ -111,6 +111,13 @@ summary::-webkit-details-marker {
   font-size: calc(0.75rem * var(--scr));
 }
 
+/* 磕頭朱印的 +1 往上飄、淡出 */
+@keyframes float-up {
+  0% { opacity: 0; transform: translate(-50%, 0) scale(0.8); }
+  15% { opacity: 1; transform: translate(-50%, -0.6rem) scale(1.1); }
+  100% { opacity: 0; transform: translate(-50%, -3rem) scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
