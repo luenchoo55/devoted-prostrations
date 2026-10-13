@@ -3,6 +3,7 @@ import { EclipseTable } from "@/components/eclipse-table";
 import { EclipseDisc, HeaderTools } from "@/components/header-tools";
 import { ProstrationGuide } from "@/components/prostration-guide";
 import { CundiMonths, MantraCounter, Step } from "@/components/ritual";
+import { SutraCard } from "@/components/sutra-card";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { card, Note, PlayLink, Scroll, ScriptureBody, Verses } from "@/components/ui";
 import { LINKS } from "@/lib/ritual";
@@ -87,21 +88,20 @@ export default function Home() {
 
           <Step id="sutras" title="誦經">
             <Note>會念的三部經。</Note>
-            <PlayLink href={LINKS.diamond}>金剛經</PlayLink>
-            <Scroll summary="金剛經 經文">
-              <ScriptureBody k="diamond" />
-            </Scroll>
-            <PlayLink href={LINKS.pumen}>普門品</PlayLink>
-            <Scroll summary="普門品 經文">
-              <ScriptureBody k="pumen" />
-            </Scroll>
-            <Scroll summary="大悲咒" open>
-              <Dabei />
-            </Scroll>
-            <PlayLink href={LINKS.b88}>八十八佛大懺悔文</PlayLink>
-            <Scroll summary="八十八佛大懺悔文 經文">
-              <ScriptureBody k="b88" />
-            </Scroll>
+            <div className="mt-2 grid gap-3">
+              <SutraCard glyph="金" title="金剛經" meta="金剛般若波羅蜜經 · 鳩摩羅什譯" href={LINKS.diamond}>
+                <ScriptureBody k="diamond" />
+              </SutraCard>
+              <SutraCard glyph="普" title="普門品" meta="妙法蓮華經觀世音菩薩普門品" href={LINKS.pumen}>
+                <ScriptureBody k="pumen" />
+              </SutraCard>
+              <SutraCard glyph="悲" title="大悲咒" meta="千手千眼無礙大悲心陀羅尼 · 八十四句">
+                <Dabei />
+              </SutraCard>
+              <SutraCard glyph="懺" title="八十八佛大懺悔文" meta="八十八佛洪名寶懺 · 普賢行願品偈" href={LINKS.b88}>
+                <ScriptureBody k="b88" />
+              </SutraCard>
+            </div>
           </Step>
 
           <Step id="dedicate" title="迴向">

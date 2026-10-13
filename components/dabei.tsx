@@ -10,10 +10,7 @@ export function Dabei() {
   return (
     <div className="grid gap-3">
       <div className="flex flex-wrap items-center justify-between gap-2.5">
-        <div>
-          <div className="font-display text-[21px] font-bold">大悲咒</div>
-          <div className="text-[13px] text-muted">千手千眼無礙大悲心陀羅尼 · 八十四句</div>
-        </div>
+        <span className="text-[13px] text-muted">讀音標示</span>
         <div role="group" aria-label="讀音標示" className="inline-flex overflow-hidden rounded-full border border-line">
           {MODES.map(([m, label]) => (
             <button
