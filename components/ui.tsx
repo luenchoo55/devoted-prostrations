@@ -6,21 +6,6 @@ export type TextKey = keyof typeof TEXTS;
 
 export const card = "rounded-xl border border-line bg-paper";
 
-export function PlayLink({ href, children, id }: { href: string; children: ReactNode; id?: string }) {
-  return (
-    <a
-      id={id}
-      href={href}
-      target="_blank"
-      rel="noopener"
-      className={`${card} mt-2 flex items-center justify-between gap-3 px-4 py-3 text-ink no-underline transition-colors hover:border-gold`}
-    >
-      <span className="min-w-0">{children}</span>
-      <span className="flex-none text-[13px] font-bold text-kasaya">播放 ▸</span>
-    </a>
-  );
-}
-
 export function Note({ children }: { children: ReactNode }) {
   return <p className="mb-2 text-muted">{children}</p>;
 }

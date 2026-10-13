@@ -1,9 +1,10 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { activeSteps, CUNDI_MONTHS, type StepId } from "@/lib/ritual";
 import { COUNTER_TIMES, tapCounter, toggleStep, useNow, useRitual, type Counter } from "@/lib/stores";
-import { card, PlayLink } from "./ui";
+import { card } from "./ui";
+import { useVideo, VideoRow } from "./video";
 
 const NUMERALS = "一二三四五六七八九十";
 
@@ -73,27 +74,30 @@ export function MantraCounter({ id, zh, lat }: { id: Counter; zh: string; lat: s
   );
 }
 
-// 準提佛母祈禱文：依當月份
+// 準提佛母祈禱文：預設當月，點月份可改播其他月
 export function CundiMonths() {
   const now = useNow();
   const m = now === null ? -1 : new Date(now).getMonth();
-  const current = CUNDI_MONTHS[m];
+  const [picked, setPicked] = useState<number | null>(null);
+  const sel = picked ?? m;
+  const video = useVideo("cundi");
+  const [name, url] = CUNDI_MONTHS[sel] ?? ["", CUNDI_MONTHS[0][1]];
   return (
     <>
-      <PlayLink href={current?.[1] ?? CUNDI_MONTHS[0][1]}>{current ? `本月 · ${current[0]}` : "本月"}</PlayLink>
+      <VideoRow key={sel} videoKey="cundi" href={url} label={sel < 0 ? "本月" : `${sel === m ? "本月" : "已選"} · ${name}`} />
       <div className="mt-2.5 grid grid-cols-4 gap-1.5 min-[421px]:grid-cols-6">
-        {CUNDI_MONTHS.map(([name, url], i) => (
-          <a
-            key={name}
-            href={url}
-            target="_blank"
-            rel="noopener"
-            className={`rounded-lg border bg-paper py-1.5 text-center text-sm no-underline ${
-              i === m ? "border-kasaya font-bold text-kasaya" : "border-line text-muted"
+        {CUNDI_MONTHS.map(([n], i) => (
+          <button
+            key={n}
+            type="button"
+            aria-pressed={i === sel}
+            onClick={() => { setPicked(i); video.show(); }}
+            className={`cursor-pointer rounded-lg border py-1.5 text-center text-sm ${
+              i === sel ? "border-kasaya bg-kasaya font-bold text-paper" : i === m ? "border-kasaya bg-paper font-bold text-kasaya" : "border-line bg-paper text-muted"
             }`}
           >
-            {name}
-          </a>
+            {n}
+          </button>
         ))}
       </div>
     </>

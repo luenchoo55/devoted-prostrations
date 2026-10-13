@@ -5,7 +5,8 @@ import { ProstrationGuide } from "@/components/prostration-guide";
 import { CundiMonths, MantraCounter, Step } from "@/components/ritual";
 import { SutraCard } from "@/components/sutra-card";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { card, Note, PlayLink, Scroll, ScriptureBody, Verses } from "@/components/ui";
+import { VideoRow } from "@/components/video";
+import { card, Note, Scroll, ScriptureBody, Verses } from "@/components/ui";
 import { LINKS } from "@/lib/ritual";
 
 // 皈依文念一遍，再頂禮三遍
@@ -48,9 +49,7 @@ export default function Home() {
 
         <div className="mt-6 rounded-xl border border-dashed border-line px-4 py-3">
           <div className="text-[13px] tracking-widest text-muted">念經前 · 暖場音樂</div>
-          <a className="text-kasaya" href={LINKS.prelude} target="_blank" rel="noopener">
-            在 YouTube 播放暖場音樂
-          </a>
+          <VideoRow href={LINKS.prelude} label="暖場音樂" />
         </div>
 
         <ol className="mt-7 grid">
@@ -130,7 +129,7 @@ export default function Home() {
           <p className="text-muted">
             根據密續教言，月食出現時我們體內的氣與明點會入於中脈，此時念誦《普賢王如來發願偈》，功德極大。
           </p>
-          <PlayLink href={LINKS.pxw}>普賢王如來祈禱能顯自然智根本願文</PlayLink>
+          <VideoRow href={LINKS.pxw} label="普賢王如來祈禱能顯自然智根本願文" />
           <Scroll summary="願文 經文">
             <ScriptureBody k="pxw" />
           </Scroll>
