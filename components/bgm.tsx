@@ -71,7 +71,7 @@ export function BgmVolume({ className = "" }: { className?: string }) {
         aria-label="背景音樂音量"
         className="h-1.5 w-full min-w-0 cursor-pointer accent-[var(--kasaya)]"
       />
-      <span className="w-8 flex-none text-right text-xs text-muted tabular-nums">{Math.round(volume * 100)}</span>
+      <span className="w-7 flex-none text-right text-xs text-muted tabular-nums">{Math.round(volume * 100)}</span>
     </div>
   );
 }
@@ -100,9 +100,9 @@ export function Bgm() {
   }, []);
 
   return (
-    <div id="bgm" className="mt-6 grid scroll-mt-6 gap-2 rounded-xl border border-dashed border-line px-4 py-3">
+    <div id="bgm" className="mt-6 scroll-mt-6 rounded-xl border border-dashed border-line px-4 py-3">
       <audio ref={ref} src="/audio/tara-21-praises.mp3" loop preload="auto" />
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <BgmPlayButton />
         <div className="min-w-0 flex-1">
           <div className="text-[0.8125rem] tracking-widest text-muted">念經前 · 背景音樂</div>
@@ -117,8 +117,9 @@ export function Bgm() {
             ))}
           </div>
         )}
+        {/* 電腦、平板放在文字右邊；手機寬度不夠就換到下一行 */}
+        <BgmVolume className="w-40 flex-none max-sm:w-full max-sm:pl-[3.25rem]" />
       </div>
-      <BgmVolume className="pl-[3.25rem]" />
     </div>
   );
 }
