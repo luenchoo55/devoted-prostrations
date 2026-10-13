@@ -5,6 +5,31 @@ import { setDabeiMode, useDabeiMode, type DabeiMode } from "@/lib/stores";
 
 const MODES: [DabeiMode, string][] = [["py", "拼音"], ["zy", "注音"], ["ro", "羅馬拼音"], ["none", "不標"]];
 
+// 注音直排在字的右邊（台灣課本式）：聲調標在注音右側，輕聲「˙」在最上面
+function ZhuyinChar({ char, zhuyin }: { char: string; zhuyin: string }) {
+  const light = zhuyin.startsWith("˙");
+  const tone = /[ˊˇˋ]$/.exec(zhuyin)?.[0];
+  const symbols = [...zhuyin.replace(/[˙ˊˇˋ]/g, "")];
+  return (
+    <span className="inline-flex items-center">
+      <span>{char}</span>
+      {symbols.length > 0 && (
+        <span className="relative ml-[0.08em] flex flex-col items-center font-sans text-[0.5em] leading-[1.05] text-muted">
+          {light && <span className="leading-[0.6]">˙</span>}
+          {symbols.map((z, k) => (
+            <span key={k}>{z}</span>
+          ))}
+          {tone && (
+            <span className="absolute top-1/2 left-full -translate-y-[10%] pl-[0.05em] leading-none">{tone}</span>
+          )}
+        </span>
+      )}
+      {/* 聲調佔的位置，避免和下一個字擠在一起 */}
+      {tone && <span className="w-[0.28em]" aria-hidden />}
+    </span>
+  );
+}
+
 export function Dabei() {
   const mode = useDabeiMode();
   return (
@@ -32,10 +57,15 @@ export function Dabei() {
           return (
             <li key={i} className="grid grid-cols-[2.2em_1fr] items-end gap-1.5 border-b border-dotted border-line py-[0.1875rem]">
               <span className="pb-1.5 text-xs text-gold tabular-nums">{i + 1}</span>
-              <span className="flex min-w-0 flex-wrap gap-x-0.5 font-display text-[calc(1.375rem*var(--scr))] leading-normal">
+              <span
+                className={`flex min-w-0 flex-wrap font-display text-[calc(1.375rem*var(--scr))] leading-normal ${
+                  mode === "zy" ? "items-center gap-x-1.5 gap-y-1 py-1" : "gap-x-0.5"
+                }`}
+              >
                 {[...hz].map((c, j) => {
                   const p = syl[j] ?? "";
-                  const rt = mode === "py" ? p : mode === "zy" && p ? toZhuyin(p) : null;
+                  if (mode === "zy") return <ZhuyinChar key={j} char={c} zhuyin={p ? toZhuyin(p) : ""} />;
+                  const rt = mode === "py" ? p : null;
                   return (
                     <ruby key={j}>
                       {c}
