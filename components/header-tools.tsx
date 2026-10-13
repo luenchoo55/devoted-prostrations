@@ -5,6 +5,8 @@ import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { activeSteps, LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
 import { nextSession, SESSION_LABEL, splitDuration } from "@/lib/session";
+import { getBgm, playBgm, useBgm } from "@/lib/bgm";
+import { BgmPlayButton, BgmVolume } from "./bgm";
 import { Modal, modalBtn as btn } from "./modal";
 import { PlayIcon, Player, useVideo } from "./video";
 
@@ -147,6 +149,7 @@ function SessionModal({ onClose }: { onClose: () => void }) {
     const t = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(t);
   }, []);
+  const bgm = useBgm();
   const { start, live } = nextSession(now);
   const { d, h, m, s } = splitDuration(start - now);
   const units: [number, string][] = [[d, "天"], [h, "時"], [m, "分"], [s, "秒"]];
@@ -172,8 +175,27 @@ function SessionModal({ onClose }: { onClose: () => void }) {
       )}
       <p className="text-[0.8125rem] text-muted">{live ? "本次" : "下次"}共修：{fmtDate(start)} {fmtTime(start)}</p>
       <p className="font-display text-xl">準備好磕頭唱歌了嗎？</p>
+      {/* 彈窗開著時背景音樂照常播放，也能在這裡控制 */}
+      <div className="grid gap-1.5 rounded-xl border border-dashed border-line px-3 py-2 text-left">
+        <div className="flex items-center gap-2.5">
+          <BgmPlayButton small />
+          <div className="min-w-0 flex-1">
+            <div className="truncate font-display">聖救度佛母二十一種禮讚經</div>
+            <div className="text-xs text-muted">{bgm === "idle" ? "點任一處開始播放背景音樂" : bgm === "playing" ? "背景音樂播放中" : "背景音樂已暫停"}</div>
+          </div>
+        </div>
+        <BgmVolume />
+      </div>
       <div className="mt-1.5 flex justify-center">
-        <button type="button" autoFocus className={`${btn} border-kasaya bg-kasaya text-paper`} onClick={onClose}>
+        <button
+          type="button"
+          autoFocus
+          className={`${btn} border-kasaya bg-kasaya text-paper`}
+          onClick={() => {
+            if (getBgm() === "idle") playBgm().catch(() => {});
+            onClose();
+          }}
+        >
           準備好了
         </button>
       </div>
