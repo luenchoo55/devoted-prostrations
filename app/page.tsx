@@ -10,6 +10,7 @@ import { Toc } from "@/components/toc";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { VideoRow } from "@/components/video";
 import { card, Note, Scroll, ScriptureBody, Verses } from "@/components/ui";
+import { SOLAR_ECLIPSES } from "@/lib/eclipse";
 import { LINKS } from "@/lib/ritual";
 
 const DEDICATION = [
@@ -161,6 +162,51 @@ export default function Home() {
               <EclipseTable />
               <p className="mt-2 text-[0.8125rem] text-muted">
                 月食前 14 天起，打開此頁會跳出提醒。日期、食甚時間與類型已依 NASA 月食表（Espenak）核對，換算為台灣時間；「台灣」一欄為依月出月落推估的大致可見情形。
+              </p>
+            </div>
+          </Scroll>
+          <Scroll summary="日食小知識">
+            <ul className="grid list-disc gap-1.5 pl-5 text-[0.9375rem] leading-relaxed">
+              <li>願文說「或於日月蝕時日」，日食時同樣是念誦《普賢王如來祈願文》的殊勝時機。</li>
+              <li>日食只發生在新月（農曆初一前後），月亮走到太陽和地球中間，擋住太陽。</li>
+              <li>
+                <b>日全食</b>：太陽完全被遮住，天色瞬間變暗，可以看到太陽外圍的日冕；只有在很窄的全食帶裡才看得到。
+              </li>
+              <li>
+                <b>日環食</b>：月亮離地球較遠、看起來比太陽小，遮不滿，留下一圈「金環」。
+              </li>
+              <li>
+                <b>日偏食</b>：太陽只被遮住一部分，像被咬了一口。
+              </li>
+              <li>和月食不同，同一次日食各地看到的差很多：只有月影經過的地區看得到，離中心帶越遠遮得越少，時間也各地不同。</li>
+              <li className="font-bold text-kasaya">
+                安全提醒：絕對不能直接用眼睛、太陽眼鏡、相機或望遠鏡看太陽，請用合格的日食觀測眼鏡或針孔投影，否則可能永久傷害視力。
+              </li>
+            </ul>
+            <div className="mt-4">
+              <div className="mb-1 font-bold">近年日食一覽</div>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse text-sm [&_td]:border-b [&_td]:border-line [&_td]:px-1.5 [&_td]:py-[0.4375rem] [&_td]:align-top [&_th]:border-b [&_th]:border-line [&_th]:px-1.5 [&_th]:py-[0.4375rem] [&_th]:text-left [&_th]:text-[0.8125rem] [&_th]:font-medium [&_th]:text-muted">
+                  <thead>
+                    <tr>
+                      <th className="whitespace-nowrap">日期</th>
+                      <th className="whitespace-nowrap">類型</th>
+                      <th>主要可見地區</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {SOLAR_ECLIPSES.map(([date, type, region]) => (
+                      <tr key={date}>
+                        <td className="whitespace-nowrap tabular-nums">{date}</td>
+                        <td className="whitespace-nowrap">{type}</td>
+                        <td>{region}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-2 text-[0.8125rem] text-muted">
+                依 NASA 日食表（Espenak）整理，日期為世界時。台灣能否看到偏食及確切時間，請以中央氣象署的天文資訊為準。
               </p>
             </div>
           </Scroll>
