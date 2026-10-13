@@ -1,0 +1,145 @@
+import { Dabei } from "@/components/dabei";
+import { EclipseTable } from "@/components/eclipse-table";
+import { EclipseDisc, HeaderTools } from "@/components/header-tools";
+import { ProstrationGuide } from "@/components/prostration-guide";
+import { CundiMonths, MantraCounter, Step } from "@/components/ritual";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { card, Note, PlayLink, Scroll, ScriptureBody, Verses } from "@/components/ui";
+import { LINKS } from "@/lib/ritual";
+
+// 皈依文念一遍，再頂禮三遍
+function Refuge() {
+  return (
+    <>
+      <Verses>
+        <p>皈依頂禮本師釋迦牟尼佛，以及諸佛壇城的所有三寶三根本。</p>
+      </Verses>
+      <p className="mt-2 inline-block rounded-md bg-gold-soft px-2.5 py-0.5 text-sm">念一遍 → 頂禮三遍</p>
+    </>
+  );
+}
+
+export default function Home() {
+  return (
+    <div className="px-4">
+      <main className="mx-auto max-w-[640px] pt-7 pb-16">
+        <header className="grid gap-1.5 border-b border-line pb-6">
+          <div className="flex items-start justify-between gap-4">
+            <div className="grid min-w-0 gap-1.5">
+              <div className="text-[13px] font-bold tracking-[.18em] text-gold">每週三 · 天滿宮</div>
+              <h1 className="font-display text-[clamp(30px,8vw,42px)] leading-tight font-bold text-balance">在天滿宮虔誠磕頭</h1>
+              <p className="font-display text-[17px] tracking-wide text-kasaya italic">Devoted Prostrations at Divine Space</p>
+            </div>
+            <div className="flex flex-none flex-col items-center gap-3">
+              <ThemeToggle />
+              {/* 朱印 */}
+              <div
+                aria-hidden
+                className="grid rotate-3 place-items-center rounded-md border-2 border-kasaya px-1.5 py-2 font-display text-lg leading-[1.15] font-bold text-kasaya opacity-85 [writing-mode:vertical-rl]"
+              >
+                天滿宮
+              </div>
+            </div>
+          </div>
+          <p className="text-[15px] text-muted">依序進行，完成一項就點「完成」。</p>
+          <HeaderTools />
+        </header>
+
+        <div className="mt-6 rounded-xl border border-dashed border-line px-4 py-3">
+          <div className="text-[13px] tracking-widest text-muted">念經前 · 暖場音樂</div>
+          <a className="text-kasaya" href={LINKS.prelude} target="_blank" rel="noopener">
+            在 YouTube 播放暖場音樂
+          </a>
+        </div>
+
+        <ol className="mt-7 grid">
+          <Step id="lamp" title="頂禮點燈開智慧">
+            <Note>點 4 小時酥油蠟燭。</Note>
+            <p className="inline-block rounded-md bg-gold-soft px-2.5 py-0.5 text-sm">手不可碰燈芯</p>
+            <ProstrationGuide />
+          </Step>
+
+          <Step id="vajrasattva" title="金剛薩埵百字明咒 · 三遍">
+            <Note>今天有供品，念誦百字明咒三遍。</Note>
+            <MantraCounter
+              id="vajrasattva"
+              zh="嗡 班雜 薩埵 薩瑪雅 瑪努巴拉雅 班雜 薩埵 爹諾巴 地叉 只左 美巴哇 蘇多卡約 美巴哇 蘇波卡約 美巴哇 阿努日阿多 美巴哇 薩爾瓦 悉地 美 札雅擦 薩爾瓦 嘎瑪 蘇雜美 即當 希日楊 古魯 吽 哈哈哈哈 吙 巴嘎萬 薩爾瓦 達他嘎達 班雜 瑪美 悶雜 班吉 巴哇 瑪哈 薩瑪雅 薩埵 阿"
+              lat="Oṃ Vajrasattva samayam anupālaya, Vajrasattva tvenopatiṣṭha, dṛḍho me bhava, sutoṣyo me bhava, supoṣyo me bhava, anurakto me bhava, sarva siddhiṃ me prayaccha, sarva karma su ca me cittaṃ śreyaḥ kuru hūṃ, ha ha ha ha hoḥ, bhagavan sarva tathāgata vajra mā me muñca, vajrī bhava mahā samaya sattva āḥ"
+            />
+          </Step>
+
+          <Step id="cundi" title="準提佛母祈禱文">
+            <Note>依當月份播放，本月已標示。</Note>
+            <CundiMonths />
+          </Step>
+
+          <Step id="refuge1" title="皈依頂禮">
+            <Refuge />
+          </Step>
+
+          <Step id="mantra" title="功德倍增咒 · 七遍">
+            <MantraCounter
+              id="mantra"
+              zh="嗡 桑巴拉 桑巴拉 貝瑪納薩拉 瑪哈臧巴巴 吽呸 梭哈"
+              lat="Om Smara Smara Vimana Sara Maha Java Hum Phat Svaha"
+            />
+          </Step>
+
+          <Step id="sutras" title="誦經">
+            <Note>會念的三部經。</Note>
+            <PlayLink href={LINKS.diamond}>金剛經</PlayLink>
+            <Scroll summary="金剛經 經文">
+              <ScriptureBody k="diamond" />
+            </Scroll>
+            <PlayLink href={LINKS.pumen}>普門品</PlayLink>
+            <Scroll summary="普門品 經文">
+              <ScriptureBody k="pumen" />
+            </Scroll>
+            <Scroll summary="大悲咒" open>
+              <Dabei />
+            </Scroll>
+            <PlayLink href={LINKS.b88}>八十八佛大懺悔文</PlayLink>
+            <Scroll summary="八十八佛大懺悔文 經文">
+              <ScriptureBody k="b88" />
+            </Scroll>
+          </Step>
+
+          <Step id="dedicate" title="迴向">
+            <Scroll summary="迴向文" open>
+              <Verses>
+                <p>文殊師利勇猛智，普賢慧行亦復然，<br />我今迴向諸善根，隨彼一切常修學。<br />三世諸佛所稱歎，如是最勝諸大願，<br />我今迴向諸善根，為得普賢殊勝行。</p>
+                <p>上來諷經功德，迴向真如實際，莊嚴無上佛果菩提。<br />四恩總報，三有齊資，法界有情，同圓種智。<br />十方三世一切諸佛、諸尊菩薩摩訶薩、摩訶般若波羅蜜。</p>
+                <p>願以此功德，消除宿現業，增長諸福慧，圓成勝善根。<br />所有刀兵劫，及與饑饉等，咸皆盡滅除，世界永昇平。<br />風雨常調順，人民悉安寧，法界諸含識，同證無上道。</p>
+                <p>願消三障諸煩惱，願得智慧真明了。<br />普願罪障悉消除，世世常行菩薩道。</p>
+                <p>願我所修諸功德，資益一切諸眾生，<br />悉共迴向於佛智，速得至於涅槃城。<br />我此普賢殊勝行，無邊勝福皆迴向，<br />普願沉溺諸眾生，速往無量光佛剎。</p>
+                <p>願以此功德，普及於一切，<br />我等與眾生，皆共成佛道。</p>
+              </Verses>
+            </Scroll>
+          </Step>
+
+          <Step id="refuge2" title="皈依頂禮">
+            <Refuge />
+          </Step>
+        </ol>
+
+        <section className={`${card} mt-1.5 grid gap-2.5 border-gold p-5`}>
+          <h2 className="flex items-center gap-2.5 font-display text-[22px] font-bold">
+            <EclipseDisc />
+            月食修持
+          </h2>
+          <p className="text-muted">
+            根據密續教言，月食出現時我們體內的氣與明點會入於中脈，此時念誦《普賢王如來發願偈》，功德極大。
+          </p>
+          <PlayLink href={LINKS.pxw}>普賢王如來祈禱能顯自然智根本願文</PlayLink>
+          <Scroll summary="願文 經文">
+            <ScriptureBody k="pxw" />
+          </Scroll>
+          <EclipseTable />
+          <p className="text-[13px] text-muted">月食前 14 天起，打開此頁會跳出提醒。時間為約略值，依 NASA 月食表換算。</p>
+        </section>
+
+        <footer className="mt-2.5 text-center text-[13px] text-muted">功德圓滿 · 南無阿彌陀佛</footer>
+      </main>
+    </div>
+  );
+}
