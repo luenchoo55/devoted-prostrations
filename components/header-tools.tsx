@@ -70,7 +70,7 @@ export function HeaderTools() {
           </span>
           <h3 id="offering-title" className="font-display text-2xl leading-snug">今天有準備供品嗎？</h3>
           <p>
-            有供品的話，點燈之後要念
+            有供品的話，誦經之前要念
             <br />
             <b className="text-kasaya">「金剛薩埵百字明咒」三遍</b>
           </p>

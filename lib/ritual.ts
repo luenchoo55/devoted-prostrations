@@ -1,5 +1,5 @@
 // 儀軌步驟 id，順序即頁面上的順序；vajrasattva 只在有供品的日子出現
-export const STEP_IDS = ["lamp", "vajrasattva", "cundi", "refuge1", "mantra", "sutras", "dedicate", "refuge2"] as const;
+export const STEP_IDS = ["lamp", "cundi", "refuge1", "mantra", "vajrasattva", "sutras", "dedicate", "refuge2"] as const;
 export type StepId = (typeof STEP_IDS)[number];
 
 export const activeSteps = (offering: boolean | null) =>

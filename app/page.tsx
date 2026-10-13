@@ -59,15 +59,6 @@ export default function Home() {
             </div>
           </Step>
 
-          <Step id="vajrasattva" title="金剛薩埵百字明咒 · 三遍">
-            <Note>今天有供品，念誦百字明咒三遍。</Note>
-            <MantraCounter
-              id="vajrasattva"
-              zh="嗡 班雜 薩埵 薩瑪雅 瑪努巴拉雅 班雜 薩埵 爹諾巴 地叉 只左 美巴哇 蘇多卡約 美巴哇 蘇波卡約 美巴哇 阿努日阿多 美巴哇 薩爾瓦 悉地 美 札雅擦 薩爾瓦 嘎瑪 蘇雜美 即當 希日楊 古魯 吽 哈哈哈哈 吙 巴嘎萬 薩爾瓦 達他嘎達 班雜 瑪美 悶雜 班吉 巴哇 瑪哈 薩瑪雅 薩埵 阿"
-              lat="Oṃ Vajrasattva samayam anupālaya, Vajrasattva tvenopatiṣṭha, dṛḍho me bhava, sutoṣyo me bhava, supoṣyo me bhava, anurakto me bhava, sarva siddhiṃ me prayaccha, sarva karma su ca me cittaṃ śreyaḥ kuru hūṃ, ha ha ha ha hoḥ, bhagavan sarva tathāgata vajra mā me muñca, vajrī bhava mahā samaya sattva āḥ"
-            />
-          </Step>
-
           <Step id="cundi" title="準提佛母祈禱文">
             <Note>依當月份播放，本月已標示。</Note>
             <CundiMonths />
@@ -82,6 +73,15 @@ export default function Home() {
               id="mantra"
               zh="嗡 桑巴拉 桑巴拉 貝瑪納薩拉 瑪哈臧巴巴 吽呸 梭哈"
               lat="Om Smara Smara Vimana Sara Maha Java Hum Phat Svaha"
+            />
+          </Step>
+
+          <Step id="vajrasattva" title="金剛薩埵百字明咒 · 三遍">
+            <Note>今天有供品，念誦百字明咒三遍。</Note>
+            <MantraCounter
+              id="vajrasattva"
+              zh="嗡 班雜 薩埵 薩瑪雅 瑪努巴拉雅 班雜 薩埵 爹諾巴 地叉 只左 美巴哇 蘇多卡約 美巴哇 蘇波卡約 美巴哇 阿努日阿多 美巴哇 薩爾瓦 悉地 美 札雅擦 薩爾瓦 嘎瑪 蘇雜美 即當 希日楊 古魯 吽 哈哈哈哈 吙 巴嘎萬 薩爾瓦 達他嘎達 班雜 瑪美 悶雜 班吉 巴哇 瑪哈 薩瑪雅 薩埵 阿"
+              lat="Oṃ Vajrasattva samayam anupālaya, Vajrasattva tvenopatiṣṭha, dṛḍho me bhava, sutoṣyo me bhava, supoṣyo me bhava, anurakto me bhava, sarva siddhiṃ me prayaccha, sarva karma su ca me cittaṃ śreyaḥ kuru hūṃ, ha ha ha ha hoḥ, bhagavan sarva tathāgata vajra mā me muñca, vajrī bhava mahā samaya sattva āḥ"
             />
           </Step>
 
