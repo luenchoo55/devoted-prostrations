@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { activeSteps, LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
@@ -41,7 +41,6 @@ export function HeaderTools() {
       </div>
 
       <div className="mt-2.5 flex flex-wrap items-center gap-2">
-        <WakeLockChip />
         <button type="button" className={`${chip} border-line`} onClick={() => { resetRitual(); window.scrollTo({ top: 0 }); }}>
           重新開始
         </button>
@@ -120,35 +119,6 @@ export function HeaderTools() {
         </Modal>
       )}
     </>
-  );
-}
-
-function WakeLockChip() {
-  const lock = useRef<WakeLockSentinel | null>(null);
-  const [state, setState] = useState<"off" | "on" | "unsupported">("off");
-  const toggle = async () => {
-    if (lock.current) {
-      try { await lock.current.release(); } catch {}
-      return;
-    }
-    try {
-      const l = await navigator.wakeLock.request("screen");
-      lock.current = l;
-      setState("on");
-      l.addEventListener("release", () => { lock.current = null; setState("off"); });
-    } catch {
-      setState("unsupported");
-    }
-  };
-  return (
-    <button
-      type="button"
-      aria-pressed={state === "on"}
-      onClick={toggle}
-      className={`${chip} ${state === "on" ? "border-gold bg-gold-soft" : "border-line"}`}
-    >
-      {state === "on" ? "螢幕常亮中" : state === "unsupported" ? "此裝置不支援常亮" : "螢幕常亮"}
-    </button>
   );
 }
 
