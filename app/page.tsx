@@ -14,7 +14,7 @@ function Refuge() {
       <Verses>
         <p>皈依頂禮本師釋迦牟尼佛，以及諸佛壇城的所有三寶三根本。</p>
       </Verses>
-      <p className="mt-2 inline-block rounded-md bg-gold-soft px-2.5 py-0.5 text-sm">念一遍 → 頂禮三遍</p>
+      <p className="mt-2 inline-block rounded-md bg-gold-soft px-2.5 py-0.5 text-sm">念一遍 → 頂禮身口意三遍</p>
     </>
   );
 }
