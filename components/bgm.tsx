@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { getBgm, pauseBgm, playBgm, registerBgm, setBgmVolume, useBgm, useBgmVolume } from "@/lib/bgm";
+import { DEFAULT_VOLUME, getBgm, pauseBgm, playBgm, registerBgm, setBgmVolume, useBgm, useBgmVolume } from "@/lib/bgm";
 import { PlayIcon } from "./video";
 
 const STATUS = {
@@ -34,7 +34,7 @@ export function BgmPlayButton({ small }: { small?: boolean }) {
 }
 
 // 音量：喇叭圖示可一鍵靜音／恢復，旁邊拉桿調大小
-const lastVolume = { v: 0.6 };
+const lastVolume = { v: DEFAULT_VOLUME };
 export function BgmVolume({ className = "" }: { className?: string }) {
   const volume = useBgmVolume();
   const muted = volume === 0;
@@ -43,7 +43,7 @@ export function BgmVolume({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={() => {
-          if (muted) setBgmVolume(lastVolume.v || 0.6);
+          if (muted) setBgmVolume(lastVolume.v || DEFAULT_VOLUME);
           else { lastVolume.v = volume; setBgmVolume(0); }
         }}
         aria-label={muted ? "取消靜音" : "靜音"}

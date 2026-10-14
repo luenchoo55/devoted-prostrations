@@ -26,16 +26,17 @@ export const registerBgm = (el: HTMLAudioElement | null) => {
 
 // 音量 0～1，記在 localStorage，下次打開沿用
 const VOLUME_KEY = "tmg-bgm-volume";
+export const DEFAULT_VOLUME = 0.1;
 let volume: number | undefined;
 const getVolume = () => {
   if (volume === undefined) {
     let v = NaN;
     try { v = Number(localStorage.getItem(VOLUME_KEY) ?? NaN); } catch {}
-    volume = Number.isFinite(v) && v >= 0 && v <= 1 ? v : 0.6;
+    volume = Number.isFinite(v) && v >= 0 && v <= 1 ? v : DEFAULT_VOLUME;
   }
   return volume;
 };
-export const useBgmVolume = () => useSyncExternalStore(subscribe, getVolume, () => 0.6);
+export const useBgmVolume = () => useSyncExternalStore(subscribe, getVolume, () => DEFAULT_VOLUME);
 export function setBgmVolume(v: number) {
   volume = Math.min(1, Math.max(0, v));
   if (audio) audio.volume = volume;
