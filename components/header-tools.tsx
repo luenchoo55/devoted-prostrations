@@ -212,9 +212,9 @@ function SessionModal({ onClose }: { onClose: () => void }) {
       {live ? (
         <p className="font-display text-lg text-kasaya">已於 {fmtTime(start)} 開始，快來一起修持</p>
       ) : (
-        <div className="mx-auto flex gap-2" role="timer" aria-live="off">
+        <div className="mx-auto grid w-full max-w-[16.5rem] grid-cols-4 gap-2" role="timer" aria-live="off">
           {units.map(([v, unit]) => (
-            <div key={unit} className="grid w-[3.75rem] gap-0.5 rounded-xl border border-line bg-rice py-2">
+            <div key={unit} className="grid gap-0.5 rounded-xl border border-line bg-rice py-2">
               <span className="font-display text-[1.75rem] leading-none font-bold text-kasaya tabular-nums">
                 {unit === "天" ? v : String(v).padStart(2, "0")}
               </span>
