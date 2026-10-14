@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { activeSteps, CUNDI_MONTHS, type StepId } from "@/lib/ritual";
-import { COUNTER_TIMES, tapCounter, toggleStep, useNow, useRitual, type Counter } from "@/lib/stores";
+import { COUNTER_TIMES, tapCounter, useNow, useRitual, type Counter } from "@/lib/stores";
 import { card } from "./ui";
 import { useVideo, VideoRow } from "./video";
 
@@ -24,21 +24,9 @@ export function Step({ id, title, children }: { id: StepId; title: string; child
         {NUMERALS[index]}
       </div>
       <div className="min-w-0">
-        <div className="flex items-start justify-between gap-2.5">
-          <h2 className={`mt-1.5 mb-1 font-display text-[1.375rem] leading-snug font-bold text-balance ${d ? "text-muted" : ""}`}>
-            {title}
-          </h2>
-          <button
-            type="button"
-            aria-pressed={d}
-            onClick={() => toggleStep(id)}
-            className={`mt-1.5 flex-none cursor-pointer rounded-full border bg-paper px-3 py-0.5 text-[0.8125rem] ${
-              d ? "border-done text-done" : "border-line text-muted"
-            }`}
-          >
-            {d ? "已完成 ✓" : "完成"}
-          </button>
-        </div>
+        <h2 className={`mt-1.5 mb-1 font-display text-[1.375rem] leading-snug font-bold text-balance ${d ? "text-muted" : ""}`}>
+          {title}
+        </h2>
         {children}
       </div>
     </li>

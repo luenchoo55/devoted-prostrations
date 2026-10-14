@@ -52,7 +52,7 @@ export default function Home() {
               <KowtowSeal />
             </div>
           </div>
-          <p className="text-[0.9375rem] text-muted">依序進行，完成一項就點「完成」。</p>
+          <p className="text-[0.9375rem] text-muted">依序進行。</p>
           <HeaderTools />
         </header>
 
