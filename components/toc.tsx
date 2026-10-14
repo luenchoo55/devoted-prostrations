@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { activeSteps, STEP_LABELS } from "@/lib/ritual";
 import { useRitual } from "@/lib/stores";
 import { FontScaleControl } from "./font-scale";
@@ -14,6 +14,13 @@ const SUTRAS: [string, string][] = [
   ["sutra-b88", "八十八佛大懺悔文"],
 ];
 
+// 往下捲超過一個畫面高才顯示「回到頂部」
+const onScroll = (l: () => void) => {
+  window.addEventListener("scroll", l, { passive: true });
+  return () => window.removeEventListener("scroll", l);
+};
+const useScrolled = () => useSyncExternalStore(onScroll, () => window.scrollY > window.innerHeight, () => false);
+
 // 右下角的目錄按鈕：點開列出各步驟，點一項就捲過去
 export function Toc() {
   const [open, setOpen] = useState(false);
@@ -21,6 +28,7 @@ export function Toc() {
   const steps = activeSteps(offering);
   const current = steps.find((id) => !done.includes(id));
   const box = useRef<HTMLDivElement>(null);
+  const scrolled = useScrolled();
 
   useEffect(() => {
     if (!open) return;
@@ -95,6 +103,20 @@ export function Toc() {
             <span className="w-6 text-center" aria-hidden>◐</span>普賢王如來祈願文
           </button>
         </nav>
+      )}
+
+      {scrolled && (
+        <button
+          type="button"
+          aria-label="回到頂部"
+          title="回到頂部"
+          onClick={() => { setOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          className="grid size-12 cursor-pointer place-items-center rounded-full border-2 border-kasaya bg-paper text-kasaya shadow-[0_0.25rem_1rem_rgba(20,14,10,.18)] transition-transform hover:scale-105 active:scale-95"
+        >
+          <svg viewBox="0 0 24 24" className="size-[1.375rem]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M6 4.5h12M12 20V9M7 14l5-5 5 5" />
+          </svg>
+        </button>
       )}
 
       <button
