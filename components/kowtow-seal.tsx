@@ -2,12 +2,33 @@
 
 import { useRef, useState } from "react";
 
-// 「磕頭」朱印：每點一下飄出一個 +1
+let ctx: AudioContext | null = null;
+
+// 木魚「叩」一聲：短促的中空音，音高略往下掉、很快衰減
+function knock() {
+  ctx ??= new AudioContext();
+  if (ctx.state === "suspended") void ctx.resume();
+  const t = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(720, t);
+  osc.frequency.exponentialRampToValueAtTime(520, t + 0.08);
+  gain.gain.setValueAtTime(0.0001, t);
+  gain.gain.exponentialRampToValueAtTime(0.6, t + 0.004);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start(t);
+  osc.stop(t + 0.25);
+}
+
+// 「磕頭」朱印：每點一下敲一聲木魚、飄出一個 +1
 export function KowtowSeal() {
   const [pops, setPops] = useState<{ id: number; x: number }[]>([]);
   const nextId = useRef(0);
 
   const tap = () => {
+    knock();
     const id = nextId.current++;
     // 左右稍微錯開，連點時不會疊在同一處
     const x = Math.round((Math.random() - 0.5) * 24);
