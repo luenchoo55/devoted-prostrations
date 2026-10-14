@@ -270,7 +270,7 @@ export function CheckIn() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="mt-1.5 mb-6 flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-kasaya bg-paper px-4 py-3.5 font-display text-xl font-bold text-kasaya transition-transform active:scale-[.98]"
+        className="mt-1.5 mb-12 flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-kasaya bg-paper px-4 py-3.5 font-display text-xl font-bold text-kasaya transition-transform active:scale-[.98]"
       >
         <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <path d="M5 12.5l4.5 4.5L19 7.5" />
