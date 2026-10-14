@@ -3,7 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { daysUntil, KIND_LABEL, PRAYER_KINDS, shortName, upcomingEvents } from "@/lib/calendar";
 import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
-import { activeSteps, LINKS } from "@/lib/ritual";
+import { LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
 import { nextSession, SESSION_LABEL, splitDuration } from "@/lib/session";
 import { getBgm, playBgm, useBgm } from "@/lib/bgm";
@@ -15,9 +15,7 @@ const chip = "cursor-pointer rounded-full border bg-paper px-3.5 py-1.5 text-sm"
 const SEEN_KEY = "tmg-ecl-seen";
 
 export function HeaderTools() {
-  const { done, offering } = useRitual();
-  const steps = activeSteps(offering);
-  const finished = steps.filter((id) => done.includes(id)).length;
+  const { offering } = useRitual();
 
   const now = useNow();
   const next = now === null ? undefined : nextEclipse(now);
@@ -44,10 +42,6 @@ export function HeaderTools() {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-20 h-[0.1875rem] bg-line/60" aria-hidden>
-        <div className="h-full bg-kasaya transition-[width] duration-500" style={{ width: `${(finished / steps.length) * 100}%` }} />
-      </div>
-
       <div className="mt-2.5 flex flex-wrap items-center gap-2">
         <button type="button" className={`${chip} border-line`} onClick={() => { resetRitual(); window.scrollTo({ top: 0 }); }}>
           重新開始
