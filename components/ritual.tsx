@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { useActiveStep } from "@/lib/active-step";
 import { activeSteps, CUNDI_MONTHS, type StepId } from "@/lib/ritual";
 import { COUNTER_TIMES, tapCounter, useNow, useRitual, type Counter } from "@/lib/stores";
 import { card } from "./ui";
@@ -10,6 +11,7 @@ const NUMERALS = "一二三四五六七八九十";
 
 export function Step({ id, title, children }: { id: StepId; title: string; children?: ReactNode }) {
   const { done, offering } = useRitual();
+  const active = useActiveStep() === id;
   const index = activeSteps(offering).indexOf(id);
   if (index < 0) return null;
   const d = done.includes(id);
@@ -18,7 +20,7 @@ export function Step({ id, title, children }: { id: StepId; title: string; child
       <span aria-hidden className="absolute top-[2.875rem] bottom-1 left-[1.3125rem] w-0.5 bg-line group-last/step:hidden" />
       <div
         className={`grid size-11 place-items-center rounded-[0.625rem] border-2 border-kasaya font-display text-xl font-bold transition-colors ${
-          d ? "bg-kasaya text-paper" : "bg-paper text-kasaya"
+          active ? "bg-kasaya text-paper" : "bg-paper text-kasaya"
         }`}
       >
         {NUMERALS[index]}
