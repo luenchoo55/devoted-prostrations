@@ -65,9 +65,6 @@ export function HeaderTools() {
             {daysUntil(upcoming[0].date, now) === 0 ? "今天" : "下次"} · {shortName(upcoming[0])} {fmtDate(Date.parse(upcoming[0].date + "T12:00:00+08:00"), false).slice(5)}
           </button>
         )}
-        <span className="text-sm text-muted tabular-nums">
-          已完成 {finished} / {steps.length}
-        </span>
       </div>
 
       {showSession && <SessionModal onClose={() => setSessionModal(false)} />}
