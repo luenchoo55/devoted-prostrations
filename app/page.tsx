@@ -1,4 +1,5 @@
 import { Bgm } from "@/components/bgm";
+import { CheckIn } from "@/components/checkin";
 import { Dabei } from "@/components/dabei";
 import { EclipseTable } from "@/components/eclipse-table";
 import { EclipseDisc, HeaderTools } from "@/components/header-tools";
@@ -122,6 +123,8 @@ export default function Home() {
             <Refuge />
           </Step>
         </ol>
+
+        <CheckIn />
 
         <section id="eclipse" className={`${card} mt-1.5 grid scroll-mt-6 gap-2.5 border-gold p-5`}>
           <h2 className="flex items-center gap-2.5 font-display text-[1.375rem] font-bold">
