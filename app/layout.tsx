@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { LXGW_WenKai_TC, Noto_Sans_TC } from "next/font/google";
+import { LXGW_WenKai_TC, Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
 
 // 中文字型檔很大，不預載，交給 unicode-range 按需下載
@@ -13,6 +13,14 @@ const wenkai = LXGW_WenKai_TC({
 const notoSans = Noto_Sans_TC({
   variable: "--font-noto-sans",
   weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  preload: false,
+});
+
+// 只給打卡感謝小卡（canvas）用，用到才下載
+const notoSerif = Noto_Serif_TC({
+  variable: "--font-noto-serif",
+  weight: ["500", "700"],
   subsets: ["latin"],
   preload: false,
 });
@@ -35,7 +43,7 @@ const themeScript = `try{var t=localStorage.getItem("tmg-theme");if(t!=="light"&
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="zh-Hant" className={`${wenkai.variable} ${notoSans.variable} antialiased`} suppressHydrationWarning>
+    <html lang="zh-Hant" className={`${wenkai.variable} ${notoSans.variable} ${notoSerif.variable} antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
