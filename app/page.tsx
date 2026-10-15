@@ -23,6 +23,25 @@ const DEDICATION = [
   [ "願以此功德，普及於一切，", "我等與眾生，皆共成佛道。" ],
 ];
 
+// 誦經前：稱念佛號、淨口業真言、開經偈
+const PRELUDE: [string, string, string[]][] = [
+  ["稱念佛號", "恭敬合掌 · 念三遍", ["南無本師釋迦牟尼佛"]],
+  ["淨口業真言", "可選 · 念三遍", ["唵，修唎修唎，摩訶修唎，修修唎，娑婆訶。"]],
+  ["開經偈", "念一遍", ["無上甚深微妙法，百千萬劫難遭遇，", "我今見聞得受持，願解如來真實義。"]],
+];
+
+// 拜拜小提醒：[要點, 原因]
+const TIPS: [string, string][] = [
+  ["手不碰燈芯、燭芯", "燈火供佛，象徵智慧光明照破無明，燈芯是供品的一部分，用手去碰不恭敬；手上的油汗也會讓燈芯燒不好，還容易燙傷。要熄燈時用扇子輕搧或熄燈罩，不用嘴吹。"],
+  ["經本不直接放地上，下面要墊東西", "經書承載佛法，是三寶中的「法寶」，和佛像一樣要恭敬。放地上容易被踩到、弄髒，所以要放在桌上，或墊經袋、乾淨的布或拜墊再放。"],
+  ["不跨過經本", "跨越經書等於把佛法踩在腳下，是輕慢的表現。經本放在走道上時，請拿起來或繞過去。拜墊、佛具也一樣不要跨。"],
+  ["經書輕拿輕翻", "翻頁不沾口水、不折頁，經書上不壓放手機、杯子等雜物；念完合起來收好，放在高處或乾淨的地方。"],
+  ["佛桌上不放私人物品", "佛桌是供佛的地方，包包、手機、鑰匙、飲料請放旁邊，保持佛前清淨莊嚴。"],
+  ["不可使用佛桌上的筊", "佛桌上的筊是供在佛前的法器，不能拿來擲筊問事，後果業力自負。"],
+  ["晚到請從後門安靜進入", "共修已經開始的話，請從後門安靜進入，不打擾大家念誦，再頂禮、點燈。"],
+  ["手機靜音", "手機調成靜音，共修時專心念誦，不大聲交談。"],
+];
+
 // 皈依文念一遍，再頂禮三遍
 function Refuge() {
   return (
@@ -84,6 +103,21 @@ export default function Home() {
 
           <Step id="refuge1" title="皈依頂禮">
             <Refuge />
+          </Step>
+
+          <Step id="prelude" title="誦經前準備">
+            <Note>先淨心（洗手、沉澱心情），再依序念誦：</Note>
+            <div className="grid gap-4">
+              {PRELUDE.map(([name, times, lines]) => (
+                <div key={name}>
+                  <h3 className="mb-1.5 flex flex-wrap items-center gap-2 font-display text-lg font-bold">
+                    {name}
+                    <span className="rounded-md bg-gold-soft px-2 py-0.5 font-sans text-sm font-normal">{times}</span>
+                  </h3>
+                  <Verses stanzas={[lines]} />
+                </div>
+              ))}
+            </div>
           </Step>
 
           <Step id="vajrasattva" title="金剛薩埵百字明咒 · 三遍">
@@ -208,6 +242,19 @@ export default function Home() {
               </p>
             </div>
           </Scroll>
+        </section>
+
+        <section id="tips" className={`${card} mt-4 grid scroll-mt-6 gap-3 p-5`}>
+          <h2 className="font-display text-[1.375rem] font-bold">拜拜小提醒</h2>
+          <ul className="grid gap-3">
+            {TIPS.map(([title, why]) => (
+              <li key={title} className="grid gap-0.5">
+                <b className="font-display text-[1.0625rem] text-kasaya">{title}</b>
+                <p className="text-[0.9375rem] leading-relaxed text-muted">{why}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="text-[0.8125rem] text-muted">各道場規矩略有不同，以師父與道場的說明為準。</p>
         </section>
 
         <Toc />

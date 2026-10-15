@@ -103,6 +103,9 @@ export function Toc() {
           <button type="button" className={`${item} text-sm text-muted`} onClick={() => go("eclipse")}>
             <span className="w-6 text-center" aria-hidden>◐</span>普賢王如來祈願文
           </button>
+          <button type="button" className={`${item} text-sm text-muted`} onClick={() => go("tips")}>
+            <span className="w-6 text-center" aria-hidden>※</span>拜拜小提醒
+          </button>
         </nav>
       )}
 
