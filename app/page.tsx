@@ -248,7 +248,7 @@ export default function Home() {
           <ul className="grid gap-3">
             {TIPS.map(([title, why]) => (
               <li key={title} className="grid gap-0.5">
-                <b className="font-display text-[1.0625rem] text-kasaya">{title}</b>
+                <b className="font-display text-[1.0625rem] text-balance text-kasaya">{title}</b>
                 <p className="text-[0.9375rem] leading-relaxed text-muted">{why}</p>
               </li>
             ))}

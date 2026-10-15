@@ -76,11 +76,11 @@ function NumberedLines({ lines, mode }: { lines: [string, string][]; mode: Dabei
   return (
     <ol className="dharani grid gap-1" data-mode={mode}>
       {lines.map(([hz, py], i) => (
-        <li key={i} className="grid grid-cols-[2.2em_1fr] items-end gap-1.5 border-b border-dotted border-line py-[0.1875rem]">
+        <li key={i} className="grid grid-cols-[1.75em_1fr] items-end gap-1 border-b border-dotted border-line py-[0.1875rem]">
           <span className="pb-1.5 font-sans text-xs leading-normal text-gold tabular-nums">{i + 1}</span>
           <span
             className={`flex min-w-0 flex-wrap font-display text-[calc(1.375rem*var(--scr))] leading-normal ${
-              mode === "zy" ? "items-center gap-x-1.5 gap-y-1 py-1" : "gap-x-0.5"
+              mode === "zy" ? "items-center gap-x-1 gap-y-1 py-1" : "gap-x-0.5"
             }`}
           >
             <Syllables hz={hz} py={py} mode={mode} />
@@ -95,7 +95,7 @@ function NumberedLines({ lines, mode }: { lines: [string, string][]; mode: Dabei
 export function Mantra({ title, phrases, numbered }: { title?: string; phrases: [string, string][]; numbered?: boolean }) {
   const mode = useDabeiMode();
   return (
-    <div className="grid gap-3 rounded-xl bg-gold-soft/40 p-3">
+    <div className="grid gap-3 rounded-xl bg-gold-soft/40 px-2 py-3 sm:px-3">
       {title && <div className="text-center font-bold tracking-wider text-kasaya">{title}</div>}
       <ReadingToggle />
       {numbered ? (
@@ -103,7 +103,7 @@ export function Mantra({ title, phrases, numbered }: { title?: string; phrases: 
       ) : (
         <div className="dharani flex flex-wrap items-end gap-x-4 gap-y-2" data-mode={mode}>
           {phrases.map(([hz, py], i) => (
-            <span key={i} className={`inline-flex ${mode === "zy" ? "items-center gap-x-1.5" : "gap-x-0.5"}`}>
+            <span key={i} className={`inline-flex max-w-full flex-wrap ${mode === "zy" ? "items-center gap-x-1 gap-y-1" : "gap-x-0.5"}`}>
               <Syllables hz={hz} py={py} mode={mode} />
             </span>
           ))}

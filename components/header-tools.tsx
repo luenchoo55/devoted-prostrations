@@ -14,7 +14,7 @@ import { PlayIcon, Player, useVideo } from "./video";
 const chip = "cursor-pointer rounded-full border bg-paper px-3.5 py-1.5 text-sm";
 const SEEN_KEY = "tmg-ecl-seen";
 const TENSHA_SEEN_KEY = "tmg-tensha-seen";
-const pxwLink = "text-kasaya underline decoration-dotted underline-offset-4";
+const pxwLink = "whitespace-nowrap text-kasaya underline decoration-dotted underline-offset-4";
 
 // pxwText：願文全文，由伺服器端算好傳進來，避免把整份經文打包進前端
 export function HeaderTools({ pxwText }: { pxwText: ReactNode }) {
