@@ -13,9 +13,9 @@ export default function LoginPage() {
         action={action}
         className="grid w-full max-w-[22rem] gap-4 rounded-[1.125rem] border border-gold bg-paper px-6 pt-7 pb-6 text-center"
       >
-        <div className="flex items-center justify-center gap-3">
-          <h1 className="font-display text-xl font-bold text-kasaya">在天滿宮虔誠磕頭</h1>
-          <KowtowSeal />
+        <h1 className="font-display text-xl font-bold text-kasaya">在天滿宮虔誠磕頭</h1>
+        <div className="flex justify-center py-2">
+          <KowtowSeal large />
         </div>
         <label className="grid gap-2 text-sm text-muted">
           請輸入密碼
