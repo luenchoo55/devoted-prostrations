@@ -28,6 +28,8 @@ const notoSerif = Noto_Serif_TC({
 export const metadata: Metadata = {
   title: "在天滿宮虔誠磕頭",
   description: "每週三天滿宮修持：點燈、準提祈禱、功德倍增咒、誦經、迴向，依序完成。",
+  // 私人網站：不讓搜尋引擎收錄
+  robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

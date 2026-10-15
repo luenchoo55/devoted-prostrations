@@ -57,9 +57,6 @@ export function MantraCounter({ id, zh, lat }: { id: Counter; zh: string; lat: s
             <span key={i} className={`size-[1.125rem] rounded-full border-2 border-gold transition-colors ${i < n ? "bg-gold" : ""}`} />
           ))}
         </div>
-        <span className="text-sm text-muted tabular-nums">
-          {n} / {total}
-        </span>
         {n >= total && <span className="text-xs text-muted">再點一次可清空重來</span>}
       </div>
     </div>

@@ -52,9 +52,10 @@ export function Toc() {
   return (
     <div ref={box} className="fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-20 flex flex-col items-end gap-3">
       {open && (
+        // 高度扣掉下方 2～3 顆圓鈕與間距，避免頂端超出畫面
         <nav
           aria-label="目錄"
-          className="max-h-[calc(100dvh-6rem)] w-64 overflow-y-auto rounded-2xl border border-gold bg-paper p-2 shadow-[0_0.5rem_2rem_rgba(20,14,10,.18)]"
+          className={`${scrolled ? "max-h-[calc(100dvh-14rem)]" : "max-h-[calc(100dvh-10rem)]"} w-64 overflow-y-auto rounded-2xl border border-gold bg-paper p-2 shadow-[0_0.5rem_2rem_rgba(20,14,10,.18)]`}
         >
           <div className="flex items-center justify-between px-2 pt-1 pb-2">
             <span className="font-display text-lg font-bold">目錄</span>
