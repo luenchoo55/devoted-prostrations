@@ -1,11 +1,22 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState, useTransition } from "react";
 import { KowtowSeal } from "@/components/kowtow-seal";
-import { login } from "./actions";
+import { kowtowLogin, login } from "./actions";
+
+const KOWTOW_TIMES = 108;
 
 export default function LoginPage() {
   const [error, action, pending] = useActionState(login, null);
+  const [count, setCount] = useState(0);
+  const [entering, startEntering] = useTransition();
+
+  // 磕滿 108 次直接進站
+  const kowtow = () => {
+    const n = count + 1;
+    setCount(n);
+    if (n === KOWTOW_TIMES) startEntering(() => kowtowLogin());
+  };
 
   return (
     <main className="grid min-h-dvh place-items-center p-4">
@@ -14,8 +25,11 @@ export default function LoginPage() {
         className="grid w-full max-w-[22rem] gap-4 rounded-[1.125rem] border border-gold bg-paper px-6 pt-7 pb-6 text-center"
       >
         <h1 className="font-display text-xl font-bold text-kasaya">在天滿宮虔誠磕頭</h1>
-        <div className="flex justify-center py-2">
-          <KowtowSeal large />
+        <div className="grid justify-items-center gap-2 py-2">
+          <KowtowSeal large onTap={kowtow} />
+          <p className="min-h-5 text-sm text-muted tabular-nums">
+            {entering ? "功德圓滿，進入中…" : count > 0 ? `已磕頭 ${count} 次` : ""}
+          </p>
         </div>
         <label className="grid gap-2 text-sm text-muted">
           請輸入密碼

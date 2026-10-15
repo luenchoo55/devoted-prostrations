@@ -23,12 +23,13 @@ function knock() {
 }
 
 // 「磕頭」朱印：每點一下敲一聲木魚、飄出一個 +1
-export function KowtowSeal({ large = false }: { large?: boolean }) {
+export function KowtowSeal({ large = false, onTap }: { large?: boolean; onTap?: () => void }) {
   const [pops, setPops] = useState<{ id: number; x: number }[]>([]);
   const nextId = useRef(0);
 
   const tap = () => {
     knock();
+    onTap?.();
     const id = nextId.current++;
     // 左右稍微錯開，連點時不會疊在同一處
     const x = Math.round((Math.random() - 0.5) * 24);
