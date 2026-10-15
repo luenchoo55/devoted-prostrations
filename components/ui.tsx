@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import TEXTS from "@/lib/texts.json";
+import { ScrollCollapse } from "./scroll-collapse";
 
 type Block = [string, string | string[]];
 export type TextKey = keyof typeof TEXTS;
@@ -21,7 +22,10 @@ export function Scroll({ summary, open, children }: { summary: string; open?: bo
           <span className="hidden group-open/scr:inline">收合 ▴</span>
         </span>
       </summary>
-      <div className="mx-4 mt-3 mb-4">{children}</div>
+      <div className="mx-4 mt-3 mb-4">
+        {children}
+        <ScrollCollapse />
+      </div>
     </details>
   );
 }

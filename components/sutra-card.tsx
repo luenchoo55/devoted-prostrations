@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { FontScaleControl } from "./font-scale";
 import { PlayIcon, Player, useVideo } from "./video";
 
@@ -23,9 +24,10 @@ export function SutraCard({
   const [open, setOpen] = useState(false);
   const video = useVideo(title);
   const ref = useRef<HTMLElement>(null);
+  // 先讓經文收起來再捲，否則捲動時卡片還是展開的長度，收合後會停在很下面
   const collapse = () => {
-    setOpen(false);
-    ref.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    flushSync(() => setOpen(false));
+    ref.current?.scrollIntoView({ block: "start", behavior: "smooth" });
   };
 
   return (
