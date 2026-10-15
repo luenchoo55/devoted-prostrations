@@ -1,5 +1,5 @@
 // 儀軌步驟 id，順序即頁面上的順序；vajrasattva 只在有供品的日子出現
-export const STEP_IDS = ["lamp", "cundi", "refuge1", "mantra", "vajrasattva", "sutras", "dedicate", "refuge2"] as const;
+export const STEP_IDS = ["lamp", "cundi", "mantra", "refuge1", "vajrasattva", "sutras", "dedicate", "refuge2"] as const;
 export type StepId = (typeof STEP_IDS)[number];
 
 export const activeSteps = (offering: boolean | null) =>
@@ -9,8 +9,8 @@ export const activeSteps = (offering: boolean | null) =>
 export const STEP_LABELS: Record<StepId, string> = {
   lamp: "頂禮點燈",
   cundi: "準提佛母祈禱文",
-  refuge1: "皈依頂禮",
   mantra: "功德倍增咒",
+  refuge1: "皈依頂禮",
   vajrasattva: "金剛薩埵百字明咒",
   sutras: "誦經",
   dedicate: "迴向",

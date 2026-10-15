@@ -74,16 +74,16 @@ export default function Home() {
             <CundiMonths />
           </Step>
 
-          <Step id="refuge1" title="皈依頂禮">
-            <Refuge />
-          </Step>
-
           <Step id="mantra" title="功德倍增咒 · 七遍">
             <MantraCounter
               id="mantra"
               zh="嗡 桑巴拉 桑巴拉 貝瑪納薩拉 瑪哈臧巴巴 吽呸 梭哈"
               lat="Om Smara Smara Vimana Sara Maha Java Hum Phat Svaha"
             />
+          </Step>
+
+          <Step id="refuge1" title="皈依頂禮">
+            <Refuge />
           </Step>
 
           <Step id="vajrasattva" title="金剛薩埵百字明咒 · 三遍">
