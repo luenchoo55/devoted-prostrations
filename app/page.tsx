@@ -5,6 +5,7 @@ import { EclipseTable } from "@/components/eclipse-table";
 import { EclipseDisc, HeaderTools } from "@/components/header-tools";
 import { KowtowSeal } from "@/components/kowtow-seal";
 import { LocationButton } from "@/components/location";
+import { PrayerDayOnly } from "@/components/prayer-day";
 import { ProstrationGuide } from "@/components/prostration-guide";
 import { CundiMonths, MantraCounter, Step } from "@/components/ritual";
 import { SutraCard } from "@/components/sutra-card";
@@ -73,7 +74,7 @@ export default function Home() {
             </div>
           </div>
           <p className="text-[0.9375rem] text-muted">依序進行。</p>
-          <HeaderTools />
+          <HeaderTools pxwText={<ScriptureBody k="pxw" />} />
         </header>
 
         <Bgm />
@@ -160,6 +161,8 @@ export default function Home() {
 
         <CheckIn />
 
+        {/* 只在日月食、冬夏至、年節當天出現 */}
+        <PrayerDayOnly>
         <section id="eclipse" className={`${card} mt-1.5 grid scroll-mt-6 gap-2.5 border-gold p-5`}>
           <h2 className="flex items-center gap-2.5 font-display text-[1.375rem] font-bold">
             <EclipseDisc />
@@ -243,6 +246,7 @@ export default function Home() {
             </div>
           </Scroll>
         </section>
+        </PrayerDayOnly>
 
         <section id="tips" className={`${card} mt-4 grid scroll-mt-6 gap-3 p-5`}>
           <h2 className="font-display text-[1.375rem] font-bold">拜拜小提醒</h2>

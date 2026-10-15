@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { daysUntil, KIND_LABEL, nextTensha, PRAYER_KINDS, shortName, upcomingEvents } from "@/lib/calendar";
 import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { LINKS } from "@/lib/ritual";
@@ -14,8 +14,10 @@ import { PlayIcon, Player, useVideo } from "./video";
 const chip = "cursor-pointer rounded-full border bg-paper px-3.5 py-1.5 text-sm";
 const SEEN_KEY = "tmg-ecl-seen";
 const TENSHA_SEEN_KEY = "tmg-tensha-seen";
+const pxwLink = "text-kasaya underline decoration-dotted underline-offset-4";
 
-export function HeaderTools() {
+// pxwText：願文全文，由伺服器端算好傳進來，避免把整份經文打包進前端
+export function HeaderTools({ pxwText }: { pxwText: ReactNode }) {
   const { offering } = useRitual();
 
   const now = useNow();
@@ -23,6 +25,12 @@ export function HeaderTools() {
   // null：依「14 天內且本次開頁未看過」自動決定；true/false：使用者手動開關
   const [eclipseOpen, setEclipseOpen] = useState<boolean | null>(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [pxwOpen, setPxwOpen] = useState(false);
+  const pxwVideo = useVideo("pxw-modal");
+  const closePxw = () => {
+    if (pxwVideo.open) pxwVideo.toggle();
+    setPxwOpen(false);
+  };
   const upcoming = now === null ? [] : upcomingEvents(now);
   // 每次打開先跳共修倒數，關掉後才問供品、提醒月食
   const showSession = useSessionModal() && now !== null;
@@ -120,7 +128,18 @@ export function HeaderTools() {
                       {prayer && <span className="size-2 flex-none rounded-full bg-kasaya" aria-label="宜誦願文" />}
                       <span className="font-display text-[1.0625rem]">{e.name}</span>
                     </span>
-                    <span className="text-xs text-muted">{KIND_LABEL[e.kind]}</span>
+                    <span className="flex flex-wrap items-center gap-x-2 text-xs text-muted">
+                      {KIND_LABEL[e.kind]}
+                      {/* 月食那列整列可點、會開月食提醒（裡面能播願文），這裡只做樣子 */}
+                      {prayer &&
+                        (e.kind === "lunar-eclipse" ? (
+                          <span className={pxwLink}>普賢王如來祈願文 ▸</span>
+                        ) : (
+                          <button type="button" className={`${pxwLink} cursor-pointer`} onClick={() => { setCalendarOpen(false); setPxwOpen(true); }}>
+                            普賢王如來祈願文 ▸
+                          </button>
+                        ))}
+                    </span>
                   </span>
                   <span className={`flex-none text-xs tabular-nums ${d === 0 ? "font-bold text-kasaya" : "text-muted"}`}>{d === 0 ? "今天" : `${d} 天後`}</span>
                 </>
@@ -178,6 +197,34 @@ export function HeaderTools() {
               知道了
             </button>
           </div>
+        </Modal>
+      )}
+
+      {pxwOpen && (
+        <Modal labelledBy="pxw-title" onClose={closePxw}>
+          <span aria-hidden className="mx-auto grid size-14 place-items-center rounded-xl bg-gold-soft font-display text-[1.75rem] font-bold text-kasaya">
+            願
+          </span>
+          <h3 id="pxw-title" className="font-display text-2xl leading-snug">普賢王如來祈願文</h3>
+          <p className="text-[0.9375rem]">
+            願文說「或於日月蝕時日……或於冬夏至年節，發心自修為普賢，與眾虔敬誦此願」，這些日子念誦功德特別大。
+          </p>
+          {pxwVideo.open && <Player href={LINKS.pxw} title="普賢王如來祈禱能顯自然智根本願文" />}
+          <div className="mt-1.5 flex flex-wrap justify-center gap-2">
+            <button
+              type="button"
+              aria-expanded={pxwVideo.open}
+              data-chant
+              onClick={pxwVideo.toggle}
+              className={`${btn} flex items-center gap-1.5 ${pxwVideo.open ? "border-kasaya text-kasaya" : "border-kasaya bg-kasaya text-paper"}`}
+            >
+              {pxwVideo.open ? "收起影片" : <><PlayIcon />播放願文</>}
+            </button>
+            <button type="button" autoFocus className={`${btn} border-line`} onClick={closePxw}>
+              關閉
+            </button>
+          </div>
+          <div className="mt-3 border-t border-line pt-4 text-left">{pxwText}</div>
         </Modal>
       )}
 

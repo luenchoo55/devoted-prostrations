@@ -144,6 +144,12 @@ export const KIND_LABEL: Record<EventKind, string> = {
 // 願文說「或於日月蝕時日……或於冬夏至年節」，這幾類特別適合念誦
 export const PRAYER_KINDS: EventKind[] = ["lunar-eclipse", "solar-eclipse", "solar-term", "new-year"];
 
+// 今天（台灣日期）是否為宜誦願文的日子
+export const isPrayerDay = (now: number) => {
+  const today = twDate(now);
+  return EVENTS.some((e) => e.date === today && PRAYER_KINDS.includes(e.kind));
+};
+
 // 今天（台灣日期）以後的節令，含今天
 export const upcomingEvents = (now: number, n = 8) => {
   const today = twDate(now);
