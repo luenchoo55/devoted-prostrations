@@ -22,7 +22,7 @@ export default function LoginPage() {
     <main className="grid min-h-dvh place-items-center p-4">
       <form
         action={action}
-        className="grid w-full max-w-[22rem] gap-4 rounded-[1.125rem] border border-gold bg-paper px-6 pt-7 pb-6 text-center"
+        className="grid w-full max-w-[22rem] grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.125rem] border border-gold bg-paper px-6 pt-7 pb-6 text-center"
       >
         <h1 className="font-display text-xl font-bold text-kasaya">在天滿宮虔誠磕頭</h1>
         <div className="grid justify-items-center gap-2 py-2">
@@ -31,7 +31,7 @@ export default function LoginPage() {
             {entering ? "功德圓滿，進入中…" : count > 0 ? `已磕頭 ${count} 次` : ""}
           </p>
         </div>
-        <label className="grid gap-2 text-sm text-muted">
+        <label className="grid grid-cols-[minmax(0,1fr)] gap-2 text-sm text-muted">
           請輸入密碼
           <input
             type="password"
@@ -40,7 +40,7 @@ export default function LoginPage() {
             autoComplete="current-password"
             autoFocus
             required
-            className="rounded-lg border border-gold bg-transparent px-3 py-2 text-center text-base tracking-widest text-ink outline-none focus:border-kasaya"
+            className="w-full min-w-0 rounded-lg border border-gold bg-transparent px-3 py-2 text-center text-base tracking-widest text-ink outline-none focus:border-kasaya"
           />
         </label>
         {error && <p className="text-sm text-kasaya">{error}</p>}
