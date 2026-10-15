@@ -86,17 +86,35 @@ export const DABEI: [string, string][] = [
   ["娑婆訶","suō pó hē"]
 ];
 
+// 經文中可標讀音的咒，每組 [漢字, 拼音]
+// diamond：金剛般若波羅蜜真言（金剛經末）；dabei：普門品後接誦大悲咒
+export const MANTRAS: Record<string, { title?: string; phrases: [string, string][]; numbered?: boolean }> = {
+  dabei: { title: "大悲咒", phrases: DABEI, numbered: true },
+  diamond: { phrases: [
+    ["那謨婆伽跋帝", "nā mó pó qié bá dì"],
+    ["鉢喇壤", "bō là ráng"],
+    ["波羅弭多曳", "bō luó mí duō yì"],
+    ["唵伊利底", "om yī lì dǐ"],
+    ["伊室利", "yī shì lì"],
+    ["輸盧馱", "shū lú tuó"],
+    ["毘舍耶", "pí shě yē"],
+    ["毘舍耶", "pí shě yē"],
+    ["莎婆訶", "suō pó hē"],
+  ] },
+};
+
 const ZY: Record<string, string> = {na:"ㄋㄚ",mo:"ㄇㄛ",he:"ㄏㄜ",la:"ㄌㄚ",da:"ㄉㄚ",duo:"ㄉㄨㄛ",ye:"ㄧㄝ",a:"ㄚ",li:"ㄌㄧ",po:"ㄆㄛ",lu:"ㄌㄨ",jie:"ㄐㄧㄝ",di:"ㄉㄧ",
   shuo:"ㄕㄨㄛ",bo:"ㄅㄛ",pu:"ㄆㄨ",ti:"ㄊㄧ",sa:"ㄙㄚ",jia:"ㄐㄧㄚ",ni:"ㄋㄧ",an:"ㄢ",fa:"ㄈㄚ",yi:"ㄧ",shu:"ㄕㄨ",xie:"ㄒㄧㄝ",xi:"ㄒㄧ",ji:"ㄐㄧ",
   meng:"ㄇㄥ",shi:"ㄕ",fo:"ㄈㄛ",leng:"ㄌㄥ",tuo:"ㄊㄨㄛ",jin:"ㄐㄧㄣ",chi:"ㄔ",mie:"ㄇㄧㄝ",ta:"ㄊㄚ",dou:"ㄉㄡ",peng:"ㄆㄥ",yun:"ㄩㄣ",qie:"ㄑㄧㄝ",
   te:"ㄊㄜ",zhi:"ㄓ",luo:"ㄌㄨㄛ",ju:"ㄐㄩ",du:"ㄉㄨ",she:"ㄕㄜ",zhe:"ㄓㄜ",mu:"ㄇㄨ",can:"ㄘㄢ",sha:"ㄕㄚ",hu:"ㄏㄨ",suo:"ㄙㄨㄛ",su:"ㄙㄨ",mi:"ㄇㄧ",
-  se:"ㄙㄜ",yu:"ㄩ",seng:"ㄙㄥ",sheng:"ㄕㄥ",dian:"ㄉㄧㄢ",man:"ㄇㄢ",ba:"ㄅㄚ"};
+  se:"ㄙㄜ",yu:"ㄩ",seng:"ㄙㄥ",sheng:"ㄕㄥ",dian:"ㄉㄧㄢ",man:"ㄇㄢ",ba:"ㄅㄚ",rang:"ㄖㄤ",pi:"ㄆㄧ"};
 const TONES: Record<string, [string, number]> = {"ā":["a",1],"á":["a",2],"ǎ":["a",3],"à":["a",4],"ē":["e",1],"é":["e",2],"ě":["e",3],"è":["e",4],"ī":["i",1],"í":["i",2],"ǐ":["i",3],"ì":["i",4],
   "ō":["o",1],"ó":["o",2],"ǒ":["o",3],"ò":["o",4],"ū":["u",1],"ú":["u",2],"ǔ":["u",3],"ù":["u",4]};
 const TM=["","","ˊ","ˇ","ˋ"];
 export function toZhuyin(py: string): string{
   let tone=5,base="";
   for(const c of py){if(TONES[c]){base+=TONES[c][0];tone=TONES[c][1]}else base+=c}
+  if(base==="om")return "ㄛㄇ"; // 梵音 om 沒有對應注音，也不標聲調
   const z=ZY[base];if(!z)return py;
   return tone===5?"˙"+z:z+TM[tone];
 }

@@ -1,6 +1,5 @@
 import { Bgm } from "@/components/bgm";
 import { CheckIn } from "@/components/checkin";
-import { Dabei } from "@/components/dabei";
 import { EclipseTable } from "@/components/eclipse-table";
 import { EclipseDisc, HeaderTools } from "@/components/header-tools";
 import { KowtowSeal } from "@/components/kowtow-seal";
@@ -27,7 +26,7 @@ const DEDICATION = [
 // 誦經前：稱念佛號、淨口業真言、開經偈
 const PRELUDE: [string, string, string[]][] = [
   ["稱念佛號", "恭敬合掌 · 念三遍", ["南無本師釋迦牟尼佛"]],
-  ["淨口業真言", "可選 · 念三遍", ["唵，修唎修唎，摩訶修唎，修修唎，娑婆訶。"]],
+  ["淨口業真言", "念三遍", ["唵，修唎修唎，摩訶修唎，修修唎，娑婆訶。"]],
   ["開經偈", "念一遍", ["無上甚深微妙法，百千萬劫難遭遇，", "我今見聞得受持，願解如來真實義。"]],
 ];
 
@@ -107,7 +106,6 @@ export default function Home() {
           </Step>
 
           <Step id="prelude" title="誦經前準備">
-            <Note>先淨心（洗手、沉澱心情），再依序念誦：</Note>
             <div className="grid gap-4">
               {PRELUDE.map(([name, times, lines]) => (
                 <div key={name}>
@@ -138,9 +136,6 @@ export default function Home() {
               </SutraCard>
               <SutraCard id="sutra-pumen" glyph="普" title="普門品" meta="妙法蓮華經觀世音菩薩普門品" href={LINKS.pumen}>
                 <ScriptureBody k="pumen" />
-              </SutraCard>
-              <SutraCard id="sutra-dabei" glyph="悲" title="大悲咒" meta="千手千眼無礙大悲心陀羅尼 · 八十四句">
-                <Dabei />
               </SutraCard>
               <SutraCard id="sutra-b88" glyph="懺" title="八十八佛大懺悔文" meta="八十八佛洪名寶懺 · 普賢行願品偈" href={LINKS.b88}>
                 <ScriptureBody k="b88" />
@@ -258,7 +253,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <p className="text-[0.8125rem] text-muted">各道場規矩略有不同，以師父與道場的說明為準。</p>
+          <p className="text-[0.8125rem] text-muted">各道場規矩略有不同，以道場主理人的說明為準。</p>
         </section>
 
         <Toc />

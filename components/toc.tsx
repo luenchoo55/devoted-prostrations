@@ -10,7 +10,6 @@ const NUMERALS = "一二三四五六七八九十";
 const SUTRAS: [string, string][] = [
   ["sutra-diamond", "金剛經"],
   ["sutra-pumen", "普門品"],
-  ["sutra-dabei", "大悲咒"],
   ["sutra-b88", "八十八佛大懺悔文"],
 ];
 

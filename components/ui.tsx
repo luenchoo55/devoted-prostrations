@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import TEXTS from "@/lib/texts.json";
+import { MANTRAS } from "@/lib/dabei";
+import { Mantra } from "./dabei";
 import { ScrollCollapse } from "./scroll-collapse";
 
 type Block = [string, string | string[]];
@@ -41,7 +43,7 @@ export function Phrased({ text }: { text: string }) {
   ));
 }
 
-// h：分段標題（如金剛經三十二分）；p：散文段落；v：偈頌（逐行）；n：佛號列表
+// h：分段標題（如金剛經三十二分）；p：散文段落；v：偈頌（逐行）；n：佛號列表；m：可標讀音的短咒（MANTRAS 的鍵）
 export function ScriptureBody({ k }: { k: TextKey }) {
   const blocks = TEXTS[k] as Block[];
   const heads = blocks.filter(([kind]) => kind === "h").map(([, v]) => v as string);
@@ -76,6 +78,7 @@ export function ScriptureBody({ k }: { k: TextKey }) {
             </h4>
           );
         }
+        if (kind === "m") return <Mantra key={i} {...MANTRAS[v as string]} />;
         if (kind === "n")
           return (
             <div key={i} className="grid grid-cols-[repeat(auto-fill,minmax(11em,1fr))] gap-x-3.5 gap-y-0.5 text-[calc(1.125rem*var(--scr))] leading-[1.9]">

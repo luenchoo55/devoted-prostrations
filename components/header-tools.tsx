@@ -26,7 +26,14 @@ export function HeaderTools({ pxwText }: { pxwText: ReactNode }) {
   const [eclipseOpen, setEclipseOpen] = useState<boolean | null>(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [pxwOpen, setPxwOpen] = useState(false);
+  const [pxwTextOpen, setPxwTextOpen] = useState(true);
+  // 影片一打開就自動播放，所以開彈窗時登記為播放中，順便停掉背景音樂與其他影片
   const pxwVideo = useVideo("pxw-modal");
+  const openPxw = () => {
+    setPxwTextOpen(true);
+    setPxwOpen(true);
+    pxwVideo.show();
+  };
   const closePxw = () => {
     if (pxwVideo.open) pxwVideo.toggle();
     setPxwOpen(false);
@@ -135,7 +142,7 @@ export function HeaderTools({ pxwText }: { pxwText: ReactNode }) {
                         (e.kind === "lunar-eclipse" ? (
                           <span className={pxwLink}>普賢王如來祈願文 ▸</span>
                         ) : (
-                          <button type="button" className={`${pxwLink} cursor-pointer`} onClick={() => { setCalendarOpen(false); setPxwOpen(true); }}>
+                          <button type="button" className={`${pxwLink} cursor-pointer`} onClick={() => { setCalendarOpen(false); openPxw(); }}>
                             普賢王如來祈願文 ▸
                           </button>
                         ))}
@@ -209,22 +216,32 @@ export function HeaderTools({ pxwText }: { pxwText: ReactNode }) {
           <p className="text-[0.9375rem]">
             願文說「或於日月蝕時日……或於冬夏至年節，發心自修為普賢，與眾虔敬誦此願」，這些日子念誦功德特別大。
           </p>
-          {pxwVideo.open && <Player href={LINKS.pxw} title="普賢王如來祈禱能顯自然智根本願文" />}
+          {/* 打開彈窗就直接放影片 */}
+          <Player href={LINKS.pxw} title="普賢王如來祈禱能顯自然智根本願文" />
           <div className="mt-1.5 flex flex-wrap justify-center gap-2">
             <button
               type="button"
-              aria-expanded={pxwVideo.open}
-              data-chant
-              onClick={pxwVideo.toggle}
-              className={`${btn} flex items-center gap-1.5 ${pxwVideo.open ? "border-kasaya text-kasaya" : "border-kasaya bg-kasaya text-paper"}`}
+              aria-expanded={pxwTextOpen}
+              onClick={() => setPxwTextOpen(!pxwTextOpen)}
+              className={`${btn} border-kasaya ${pxwTextOpen ? "text-kasaya" : "bg-kasaya text-paper"}`}
             >
-              {pxwVideo.open ? "收起影片" : <><PlayIcon />播放願文</>}
+              {pxwTextOpen ? "收起經文" : "展開經文"}
             </button>
             <button type="button" autoFocus className={`${btn} border-line`} onClick={closePxw}>
               關閉
             </button>
           </div>
-          <div className="mt-3 border-t border-line pt-4 text-left">{pxwText}</div>
+          {pxwTextOpen && (
+            <>
+              <div className="mt-3 border-t border-line pt-4 text-left">{pxwText}</div>
+              {/* 願文很長，底部再放一個關閉 */}
+              <div className="mt-2 flex justify-center">
+                <button type="button" className={`${btn} border-line`} onClick={closePxw}>
+                  關閉
+                </button>
+              </div>
+            </>
+          )}
         </Modal>
       )}
 
