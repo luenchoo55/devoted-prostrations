@@ -35,6 +35,18 @@ export function setBgmVolume(v: number) {
   listeners.forEach((l) => l());
 }
 
+// 「進入後不播放背景音樂」：在密碼頁設定，記在這台裝置；開著時不自動播放，仍可手動按播放
+const AUTOPLAY_OFF_KEY = "tmg-bgm-autoplay-off";
+const readAutoplayOff = () => {
+  try { return localStorage.getItem(AUTOPLAY_OFF_KEY) === "1"; } catch { return false; }
+};
+export const useBgmAutoplayOff = () => useSyncExternalStore(subscribe, readAutoplayOff, () => false);
+export function setBgmAutoplayOff(off: boolean) {
+  try { localStorage.setItem(AUTOPLAY_OFF_KEY, off ? "1" : "0"); } catch {}
+  listeners.forEach((l) => l());
+}
+export const bgmAutoplayOff = readAutoplayOff;
+
 export function playBgm() {
   if (!audio) return Promise.reject();
   return audio.play().then(() => set("playing"));

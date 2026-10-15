@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { DEFAULT_VOLUME, getBgm, pauseBgm, playBgm, registerBgm, setBgmVolume, useBgm, useBgmVolume } from "@/lib/bgm";
+import { bgmAutoplayOff, DEFAULT_VOLUME, getBgm, pauseBgm, playBgm, registerBgm, setBgmVolume, useBgm, useBgmVolume } from "@/lib/bgm";
 import { PlayIcon } from "./video";
 
 const STATUS = {
@@ -83,6 +83,11 @@ export function Bgm() {
 
   useEffect(() => {
     registerBgm(ref.current);
+    // 在密碼頁選了「進入後不播放」：先停在暫停，要聽再自己按播放
+    if (bgmAutoplayOff()) {
+      pauseBgm();
+      return () => registerBgm(null);
+    }
     const start = (e: Event) => {
       // 第一下就是在開始念經（播影片、念咒），就不用先響一下音樂
       if ((e.target as Element | null)?.closest?.("[data-chant]")) return;

@@ -3,6 +3,7 @@
 import { useActionState, useState, useTransition } from "react";
 import { KowtowSeal } from "@/components/kowtow-seal";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { setBgmAutoplayOff, useBgmAutoplayOff } from "@/lib/bgm";
 import { kowtowLogin, login } from "./actions";
 
 const KOWTOW_TIMES = 108;
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [error, action, pending] = useActionState(login, null);
   const [count, setCount] = useState(0);
   const [entering, startEntering] = useTransition();
+  const bgmOff = useBgmAutoplayOff();
 
   // 磕滿 108 次直接進站
   const kowtow = () => {
@@ -53,6 +55,18 @@ export default function LoginPage() {
           >
             {pending ? "確認中…" : "進入"}
           </button>
+          <div className="grid gap-2 border-t border-line pt-3">
+            <p className="text-[0.8125rem] leading-relaxed text-balance text-muted">進入後會播放背景音樂，如在不方便出聲的場合，可先關閉。</p>
+            <label className="flex cursor-pointer items-center justify-center gap-2.5 text-sm">
+              <input
+                type="checkbox"
+                checked={bgmOff}
+                onChange={(e) => setBgmAutoplayOff(e.target.checked)}
+                className="size-[1.125rem] cursor-pointer accent-[var(--kasaya)]"
+              />
+              進入後不播放背景音樂
+            </label>
+          </div>
         </form>
         <ThemeToggle />
       </div>
