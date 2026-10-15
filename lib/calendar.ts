@@ -2,7 +2,7 @@ import { ECLIPSES } from "./eclipse";
 
 // 歲時節令（台灣日期）。農曆節日與冬至、夏至由 lunar-javascript 產生，
 // 已與台灣行事曆（如 2027 春節 2/6）及天文演算法核對；閏月不重複過節，小月的三十日改在廿九
-export type EventKind = "lunar-eclipse" | "solar-eclipse" | "solar-term" | "new-year" | "buddhist";
+export type EventKind = "lunar-eclipse" | "solar-eclipse" | "solar-term" | "new-year" | "buddhist" | "tensha";
 export type CalEvent = { date: string; name: string; kind: EventKind };
 
 const FESTIVALS: [string, string, EventKind][] = [
@@ -111,11 +111,23 @@ const SOLAR_ECLIPSE_UT = [
   "2029-06-12T04:05Z", "2029-07-11T15:36Z", "2029-12-05T15:02Z", "2030-06-01T06:28Z", "2030-11-25T06:50Z",
 ];
 
+// 天赦日：春戊寅、夏甲午、秋戊申、冬甲子，四季以立春、立夏、立秋、立冬當天起算；由 lunar-javascript 產生，
+// 2026、2027 已與台灣農民曆核對
+const TENSHA = [
+  "2026-03-05", "2026-05-04", "2026-05-20", "2026-07-19", "2026-10-01", "2026-12-16",
+  "2027-02-28", "2027-04-29", "2027-05-15", "2027-07-14", "2027-09-26", "2027-12-11",
+  "2028-02-23", "2028-04-23", "2028-05-09", "2028-07-08", "2028-09-20", "2028-12-05",
+  "2029-02-17", "2029-04-18", "2029-07-03", "2029-09-15", "2029-11-30",
+  "2030-01-29", "2030-02-12", "2030-04-13", "2030-06-28", "2030-09-10", "2030-11-25",
+  "2031-01-24", "2031-02-07", "2031-04-08", "2031-06-23", "2031-09-05", "2031-11-04", "2031-11-20",
+];
+
 const TW = 8 * 3600e3;
 export const twDate = (t: number) => new Date(t + TW).toISOString().slice(0, 10);
 
 const EVENTS: CalEvent[] = [
   ...FESTIVALS.map(([date, name, kind]) => ({ date, name, kind })),
+  ...TENSHA.map((date) => ({ date, name: "天赦日", kind: "tensha" as const })),
   ...ECLIPSES.map((e) => ({ date: twDate(e.t), name: e.type, kind: "lunar-eclipse" as const })),
   ...SOLAR_ECLIPSE_UT.map((u) => ({ date: twDate(Date.parse(u)), name: "日食", kind: "solar-eclipse" as const })),
 ].sort((a, b) => a.date.localeCompare(b.date));
@@ -126,6 +138,7 @@ export const KIND_LABEL: Record<EventKind, string> = {
   "solar-term": "節氣",
   "new-year": "年節",
   buddhist: "佛教節日",
+  tensha: "吉日 · 宜懺悔、行善、發願",
 };
 
 // 願文說「或於日月蝕時日……或於冬夏至年節」，這幾類特別適合念誦
@@ -140,6 +153,9 @@ export const upcomingEvents = (now: number, n = 8) => {
 export function daysUntil(date: string, now: number) {
   return Math.round((Date.parse(date + "T00:00:00Z") - Date.parse(twDate(now) + "T00:00:00Z")) / 864e5);
 }
+
+// 下一個天赦日（含今天）
+export const nextTensha = (now: number) => TENSHA.find((d) => d >= twDate(now));
 
 // 按鈕上用的短名稱：去掉括號與「·」之後的補充
 export const shortName = (e: CalEvent) => e.name.replace(/（.*?）/g, "").split(" · ")[0];

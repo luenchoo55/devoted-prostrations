@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { daysUntil, KIND_LABEL, PRAYER_KINDS, shortName, upcomingEvents } from "@/lib/calendar";
+import { daysUntil, KIND_LABEL, nextTensha, PRAYER_KINDS, shortName, upcomingEvents } from "@/lib/calendar";
 import { daysTo, fmtDate, fmtTime, nextEclipse } from "@/lib/eclipse";
 import { LINKS } from "@/lib/ritual";
 import { resetRitual, setOffering, useNow, useRitual } from "@/lib/stores";
@@ -13,6 +13,7 @@ import { PlayIcon, Player, useVideo } from "./video";
 
 const chip = "cursor-pointer rounded-full border bg-paper px-3.5 py-1.5 text-sm";
 const SEEN_KEY = "tmg-ecl-seen";
+const TENSHA_SEEN_KEY = "tmg-tensha-seen";
 
 export function HeaderTools() {
   const { offering } = useRitual();
@@ -33,6 +34,19 @@ export function HeaderTools() {
   })();
   // 先問供品，再提醒月食
   const showEclipse = !showSession && offering !== null && (eclipseOpen ?? autoEclipse);
+  // 天赦日前 3 天起提醒，排在月食之後；本次開頁看過就不再跳
+  const tensha = now === null ? undefined : nextTensha(now);
+  const [tenshaClosed, setTenshaClosed] = useState(false);
+  const showTensha = (() => {
+    if (!tensha || now === null || tenshaClosed || showSession || offering === null || showEclipse) return false;
+    let seen = null;
+    try { seen = sessionStorage.getItem(TENSHA_SEEN_KEY); } catch {}
+    return daysUntil(tensha, now) <= 3 && seen !== tensha;
+  })();
+  const closeTensha = () => {
+    setTenshaClosed(true);
+    try { sessionStorage.setItem(TENSHA_SEEN_KEY, tensha ?? ""); } catch {}
+  };
   const eclipseVideo = useVideo("eclipse-modal");
   const closeEclipse = () => {
     if (eclipseVideo.open) eclipseVideo.toggle();
@@ -161,6 +175,27 @@ export function HeaderTools() {
               {eclipseVideo.open ? "收起影片" : <><PlayIcon />播放願文</>}
             </button>
             <button type="button" autoFocus className={`${btn} border-line`} onClick={closeEclipse}>
+              知道了
+            </button>
+          </div>
+        </Modal>
+      )}
+
+      {showTensha && tensha && now !== null && (
+        <Modal labelledBy="tensha-title" onClose={closeTensha}>
+          <span aria-hidden className="mx-auto grid size-14 place-items-center rounded-xl border-2 border-kasaya font-display text-[1.75rem] font-bold text-kasaya">
+            赦
+          </span>
+          <h3 id="tensha-title" className="font-display text-2xl leading-snug">
+            {(() => {
+              const d = daysUntil(tensha, now);
+              return d === 0 ? "今天是天赦日" : d === 1 ? "明天是天赦日" : `還有 ${d} 天天赦日`;
+            })()}
+          </h3>
+          <p className="text-lg font-bold text-kasaya tabular-nums">{fmtDate(Date.parse(tensha + "T12:00:00+08:00"))}</p>
+          <p>天赦日是一年中難得的大吉日，上天赦免罪過，宜懺悔、誦經、行善、發願。</p>
+          <div className="mt-1.5 flex justify-center">
+            <button type="button" autoFocus className={`${btn} border-line`} onClick={closeTensha}>
               知道了
             </button>
           </div>
