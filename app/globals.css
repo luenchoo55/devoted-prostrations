@@ -13,21 +13,7 @@
   --done: #4f6b4a;
 }
 
-/* 深色：使用者手動選的 data-theme 優先，沒選時跟系統 */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --rice: #1a1613;
-    --paper: #231e1a;
-    --ink: #eee4d4;
-    --muted: #a99c8b;
-    --line: #3b332c;
-    --kasaya: #e07a5c;
-    --gold: #e0b45a;
-    --gold-soft: #3a2f1c;
-    --done: #9cbc93;
-    color-scheme: dark;
-  }
-}
+/* 深色：只在使用者手動切換時啟用，預設一律白天 */
 :root[data-theme="dark"] {
   --rice: #1a1613;
   --paper: #231e1a;

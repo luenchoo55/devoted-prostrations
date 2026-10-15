@@ -34,14 +34,11 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3efe6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1613" },
-  ],
+  themeColor: "#f3efe6",
 };
 
-// 在畫面繪製前決定主題（使用者選過的優先，否則跟系統），避免閃一下
-const themeScript = `try{var t=localStorage.getItem("tmg-theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;var f=JSON.parse(localStorage.getItem("tmg-font")||"null");if(f)document.documentElement.dataset.font=f}catch(e){}`;
+// 在畫面繪製前決定主題（使用者選過的優先，否則一律白天），避免閃一下
+const themeScript = `try{var t=localStorage.getItem("tmg-theme");if(t!=="dark")t="light";document.documentElement.dataset.theme=t;var f=JSON.parse(localStorage.getItem("tmg-font")||"null");if(f)document.documentElement.dataset.font=f}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
