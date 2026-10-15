@@ -65,7 +65,6 @@ export function Toc() {
           <FontScaleControl className="mb-1 px-2 py-1.5" />
           <ol>
             {steps.map((id, i) => {
-              const d = done.includes(id);
               return (
                 <li key={id}>
                   <button
@@ -74,15 +73,10 @@ export function Toc() {
                     aria-current={id === current ? "step" : undefined}
                     onClick={() => go(`step-${id}`)}
                   >
-                    <span
-                      className={`grid size-6 flex-none place-items-center rounded-md border-[0.09375rem] border-kasaya font-display text-[0.8125rem] font-bold ${
-                        d ? "bg-kasaya text-paper" : "text-kasaya"
-                      }`}
-                    >
+                    <span className="grid size-6 flex-none place-items-center rounded-md border-[0.09375rem] border-kasaya font-display text-[0.8125rem] font-bold text-kasaya">
                       {NUMERALS[i]}
                     </span>
-                    <span className={`min-w-0 flex-1 truncate ${d ? "text-muted line-through decoration-muted/50" : ""}`}>{STEP_LABELS[id]}</span>
-                    {d && <span className="text-xs text-done">✓</span>}
+                    <span className="min-w-0 flex-1 truncate">{STEP_LABELS[id]}</span>
                   </button>
                   {id === "sutras" && (
                     <ul className="mb-1 ml-[1.375rem] border-l border-line pl-2">
